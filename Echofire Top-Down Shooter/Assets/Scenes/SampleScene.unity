@@ -242,8 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2782c1f485bb3c847879537406edff5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1.5
-  movementDirection: {x: 0, y: 0, z: 0}
+  walkSpeed: 4
 --- !u!143 &149857649
 CharacterController:
   m_ObjectHideFlags: 0
