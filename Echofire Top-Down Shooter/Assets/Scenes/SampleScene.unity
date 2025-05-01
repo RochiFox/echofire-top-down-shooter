@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 149857648}
   - component: {fileID: 149857650}
   - component: {fileID: 149857649}
+  - component: {fileID: 149857652}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -226,6 +227,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ac1a8b5f4415a41945d3bcdc1267d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &149857652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149857643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7d62950939ab14bb3cb304dc77dbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunTransforms:
+  - {fileID: 793042483}
+  - {fileID: 1294314066}
+  - {fileID: 1355036399}
+  - {fileID: 2008550989}
+  - {fileID: 1396057770}
+  pistol: {fileID: 793042483}
+  revolver: {fileID: 1294314066}
+  autoRifle: {fileID: 1355036399}
+  shotgun: {fileID: 2008550989}
+  rifle: {fileID: 1396057770}
+  leftHand: {fileID: 166686784}
 --- !u!1 &166686783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1574,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1768849998}
-  - component: {fileID: 1768849999}
   m_Layer: 0
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -1577,30 +1601,6 @@ Transform:
   - {fileID: 1396057770}
   m_Father: {fileID: 1852576806428300580}
   m_LocalEulerAnglesHint: {x: -90, y: 110, z: 0}
---- !u!114 &1768849999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768849997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7d62950939ab14bb3cb304dc77dbb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunTransforms:
-  - {fileID: 793042483}
-  - {fileID: 1294314066}
-  - {fileID: 1355036399}
-  - {fileID: 2008550989}
-  - {fileID: 1396057770}
-  pistol: {fileID: 793042483}
-  revolver: {fileID: 1294314066}
-  autoRifle: {fileID: 1355036399}
-  shotgun: {fileID: 2008550989}
-  rifle: {fileID: 1396057770}
-  leftHand: {fileID: 166686784}
 --- !u!1 &1776943149
 GameObject:
   m_ObjectHideFlags: 0

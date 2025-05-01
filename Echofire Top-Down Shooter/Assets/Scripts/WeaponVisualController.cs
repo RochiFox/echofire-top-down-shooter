@@ -21,7 +21,7 @@ public class WeaponVisualController : MonoBehaviour
 
     void Awake()
     {
-        animator = GetComponentInParent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
