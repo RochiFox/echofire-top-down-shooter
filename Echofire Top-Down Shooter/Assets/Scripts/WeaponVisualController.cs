@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponVisualController : MonoBehaviour
 {
+    private Animator animator;
+
     [SerializeField] private Transform[] gunTransforms;
 
     [SerializeField] private Transform pistol;
@@ -17,6 +19,11 @@ public class WeaponVisualController : MonoBehaviour
     [Header("Left hand IK")]
     [SerializeField] private Transform leftHand;
 
+    void Awake()
+    {
+        animator = GetComponentInParent<Animator>();
+    }
+
     void Start()
     {
         SwitchOn(pistol);
@@ -25,19 +32,34 @@ public class WeaponVisualController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             SwitchOn(pistol);
+            SwitchAnimationLayer(1);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             SwitchOn(revolver);
+            SwitchAnimationLayer(1);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
             SwitchOn(autoRifle);
+            SwitchAnimationLayer(1);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
             SwitchOn(shotgun);
+            SwitchAnimationLayer(2);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
             SwitchOn(rifle);
+            SwitchAnimationLayer(3);
+        }
     }
 
     private void SwitchOn(Transform gunTransform)
@@ -63,5 +85,15 @@ public class WeaponVisualController : MonoBehaviour
 
         leftHand.localPosition = targetTransform.localPosition;
         leftHand.localRotation = targetTransform.localRotation;
+    }
+
+    private void SwitchAnimationLayer(int _layerIndex)
+    {
+        for (int i = 1; i < animator.layerCount; i++)
+        {
+            animator.SetLayerWeight(i, 0);
+        }
+
+        animator.SetLayerWeight(_layerIndex, 1);
     }
 }
