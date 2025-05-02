@@ -15,4 +15,15 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         visualController.ReturnRigWeight();
     }
+
+    public void ReturnRig()
+    {
+        visualController.ReturnRigWeight();
+        visualController.ReturnWeightToLeftHandIK();
+    }
+
+    public void WeaponGrabIsOver()
+    {
+        visualController.SetBusyGrabbingWeaponTo(false);
+    }
 }
