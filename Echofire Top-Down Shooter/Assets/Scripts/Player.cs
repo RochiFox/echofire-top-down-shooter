@@ -6,17 +6,17 @@ public class Player : MonoBehaviour
 {
     public PlayerControls controls;
 
-    void Awake()
+    private void Awake()
     {
         controls = new PlayerControls();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         controls.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         controls.Disable();
     }

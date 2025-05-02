@@ -6,12 +6,12 @@ public class PlayerWeaponController : MonoBehaviour
 {
     private Player player;
 
-    void Awake()
+    private void Awake()
     {
         player = GetComponent<Player>();
     }
 
-    void Start()
+    private void Start()
     {
         player.controls.Character.Fire.performed += context => Shoot();
     }

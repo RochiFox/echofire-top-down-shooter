@@ -1,19 +1,17 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Player player;
 
-    private PlayerControls controls;
     private CharacterController characterController;
+    private PlayerControls controls;
     private Animator animator;
 
     [Header("Movement info")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     private float speed;
-    private float gravityScale = 9.81f;
     private Vector3 movementDirection;
     private float verticalVelocity;
     private bool isRunning;
@@ -26,21 +24,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 aimInput;
 
-    void Awake()
+    private void Awake()
     {
         player = GetComponent<Player>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Start()
+    private void Start()
     {
         speed = walkSpeed;
 
-        AssingInputEvents();
+        AssignInputEvents();
     }
 
-    void Update()
+    private void Update()
     {
         ApplyMovement();
         AimTowardsMouse();
@@ -55,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
         animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
 
-        bool playRunAnimation = isRunning && movementDirection.magnitude > 0;
+        bool playRunAnimation = isRunning & movementDirection.magnitude > 0;
         animator.SetBool("isRunning", playRunAnimation);
     }
 
@@ -70,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
             lookingDirection.Normalize();
 
             transform.forward = lookingDirection;
-
             aim.position = new Vector3(hitInfo.point.x, transform.position.y + 1, hitInfo.point.z);
         }
     }
@@ -78,27 +75,26 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovement()
     {
         movementDirection = new Vector3(moveInput.x, 0, moveInput.y);
-
         ApplyGravity();
 
         if (movementDirection.magnitude > 0)
         {
-            characterController.Move(Time.deltaTime * speed * movementDirection);
+            characterController.Move(movementDirection * Time.deltaTime * speed);
         }
     }
 
     private void ApplyGravity()
     {
-        if (!characterController.isGrounded)
+        if (characterController.isGrounded == false)
         {
-            verticalVelocity -= gravityScale * Time.deltaTime;
+            verticalVelocity -= 9.81f * Time.deltaTime;
             movementDirection.y = verticalVelocity;
         }
         else
             verticalVelocity = -0.5f;
     }
 
-    private void AssingInputEvents()
+    private void AssignInputEvents()
     {
         controls = player.controls;
 
