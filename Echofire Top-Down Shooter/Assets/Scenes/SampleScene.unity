@@ -2256,6 +2256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1.5
   runSpeed: 3
+  turnSpeed: 10
 --- !u!4 &1746550274
 Transform:
   m_ObjectHideFlags: 0
