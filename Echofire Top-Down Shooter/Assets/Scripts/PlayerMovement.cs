@@ -12,17 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     private float speed;
-    private Vector3 movementDirection;
     private float verticalVelocity;
-    private bool isRunning;
 
-    [Header("Aim info")]
-    [SerializeField] private Transform aim;
-    [SerializeField] private LayerMask aimLayerMask;
-    private Vector3 lookingDirection;
-
+    private Vector3 movementDirection;
     private Vector2 moveInput;
-    private Vector2 aimInput;
+
+    private bool isRunning;
 
     private void Awake()
     {
@@ -41,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         ApplyMovement();
-        AimTowardsMouse();
+        ApplyRotation();
         AnimatorControllers();
     }
 
@@ -57,19 +52,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isRunning", playRunAnimation);
     }
 
-    private void AimTowardsMouse()
+    private void ApplyRotation()
     {
-        Ray ray = Camera.main.ScreenPointToRay(aimInput);
+        Vector3 lookingDirection = player.aim.GetMousePosition() - transform.position;
+        lookingDirection.y = 0f;
+        lookingDirection.Normalize();
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, aimLayerMask))
-        {
-            lookingDirection = hitInfo.point - transform.position;
-            lookingDirection.y = 0f;
-            lookingDirection.Normalize();
-
-            transform.forward = lookingDirection;
-            aim.position = new Vector3(hitInfo.point.x, transform.position.y + 1, hitInfo.point.z);
-        }
+        transform.forward = lookingDirection;
     }
 
     private void ApplyMovement()
@@ -100,9 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         controls.Character.Movement.canceled += context => moveInput = Vector2.zero;
-
-        controls.Character.Aim.performed += context => aimInput = context.ReadValue<Vector2>();
-        controls.Character.Aim.canceled += context => aimInput = Vector2.zero;
 
         controls.Character.Run.performed += context =>
         {

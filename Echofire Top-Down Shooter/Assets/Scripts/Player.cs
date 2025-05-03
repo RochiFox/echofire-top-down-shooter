@@ -5,10 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerControls controls;
+    public PlayerAim aim { get; private set; }
 
     private void Awake()
     {
         controls = new PlayerControls();
+        aim = GetComponent<PlayerAim>();
     }
 
     private void OnEnable()

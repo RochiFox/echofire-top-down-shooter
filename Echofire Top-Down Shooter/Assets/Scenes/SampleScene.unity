@@ -2231,6 +2231,7 @@ GameObject:
   - component: {fileID: 1746550274}
   - component: {fileID: 1746550276}
   - component: {fileID: 1746550270}
+  - component: {fileID: 1746550279}
   - component: {fileID: 1746550277}
   - component: {fileID: 1746550275}
   - component: {fileID: 1746550278}
@@ -2255,10 +2256,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1.5
   runSpeed: 3
-  aim: {fileID: 2141233248}
-  aimLayerMask:
-    serializedVersion: 2
-    m_Bits: 192
 --- !u!4 &1746550274
 Transform:
   m_ObjectHideFlags: 0
@@ -2352,6 +2349,22 @@ MonoBehaviour:
   leftHandIkWeightIncreaseRate: 2.5
   leftHandIK: {fileID: 1996614115}
   leftHandIK_Target: {fileID: 196510486}
+--- !u!114 &1746550279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746550269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffe08aa552339449bb47c31e6089158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aim: {fileID: 2141233248}
+  aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &1781693768
 GameObject:
   m_ObjectHideFlags: 0
