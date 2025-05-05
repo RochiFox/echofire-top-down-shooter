@@ -17,7 +17,7 @@ public class PlayerAim : MonoBehaviour
     [Range(1, 3f)]
     [SerializeField] private float maxCameraDistance = 4f;
     [Range(3f, 5f)]
-    [SerializeField] private float cameraSensetivity = 5f;
+    [SerializeField] private float cameraSensitivity = 5f;
 
     [SerializeField] private LayerMask aimLayerMask;
 
@@ -39,7 +39,7 @@ public class PlayerAim : MonoBehaviour
         aim.position = GetMouseHitInfo().point;
         aim.position = new Vector3(aim.position.x, transform.position.y, aim.position.z);
 
-        cameraTarget.position = Vector3.Lerp(cameraTarget.position, DesiredCameraPosition(), cameraSensetivity * Time.deltaTime);
+        cameraTarget.position = Vector3.Lerp(cameraTarget.position, DesiredCameraPosition(), cameraSensitivity * Time.deltaTime);
     }
 
     private Vector3 DesiredCameraPosition()

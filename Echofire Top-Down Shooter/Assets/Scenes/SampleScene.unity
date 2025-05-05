@@ -2471,7 +2471,7 @@ MonoBehaviour:
   cameraTarget: {fileID: 2141233248}
   minCameraDistance: 1
   maxCameraDistance: 3
-  cameraSensetivity: 5
+  cameraSensitivity: 3.5
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 192
