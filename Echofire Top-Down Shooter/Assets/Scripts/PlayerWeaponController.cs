@@ -10,6 +10,9 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Transform gunPoint;
 
+    [SerializeField] private Transform weaponHolder;
+    [SerializeField] private Transform aim;
+
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -24,10 +27,30 @@ public class PlayerWeaponController : MonoBehaviour
     {
         GameObject newBullet = Instantiate(bulletPrefab, gunPoint.position, Quaternion.LookRotation(gunPoint.forward));
 
-        newBullet.GetComponent<Rigidbody>().velocity = gunPoint.forward * bulletSpeed;
+        newBullet.GetComponent<Rigidbody>().velocity = BulletDirection() * bulletSpeed;
 
         Destroy(newBullet, 5f);
 
         GetComponentInChildren<Animator>().SetTrigger("Fire");
+    }
+
+    private Vector3 BulletDirection()
+    {
+        Vector3 direction = (aim.position - gunPoint.position).normalized;
+
+        direction.y = 0;
+
+        weaponHolder.LookAt(aim);
+        gunPoint.LookAt(aim);
+
+        return direction;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(weaponHolder.position, weaponHolder.position + weaponHolder.forward * 25f);
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawLine(gunPoint.position, gunPoint.position + BulletDirection() * 25f);
     }
 }
