@@ -3215,7 +3215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLaser: {fileID: 1354336791}
   aim: {fileID: 10382972}
-  isAimingPrecisly: 0
+  isAimingPrecisly: 1
   isLockingToTarget: 1
   cameraTarget: {fileID: 2141233248}
   minCameraDistance: 1
