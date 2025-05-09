@@ -31,7 +31,7 @@ public class PlayerWeaponController : MonoBehaviour
         rbNewBullet.mass = REFERENCE_BULLET_SPEED / bulletSpeed;
         rbNewBullet.velocity = BulletDirection() * bulletSpeed;
 
-        Destroy(newBullet, 5f);
+        Destroy(newBullet, 3f);
 
         GetComponentInChildren<Animator>().SetTrigger("Fire");
     }

@@ -2938,8 +2938,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.068010084
-        value: 0.19101124
+        time: 0.054044478
+        value: 0.37968618
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2947,8 +2947,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.97732997
-        value: 0.0505618
+        time: 0.9884994
+        value: 0.13231839
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2960,10 +2960,10 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 0.15686275}
+      key1: {r: 1, g: 1, b: 1, a: 0.7058824}
+      key2: {r: 0, g: 0, b: 0, a: 0.7144323}
+      key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -2977,17 +2977,17 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 63222
-      atime2: 65535
-      atime3: 0
-      atime4: 0
-      atime5: 0
+      atime1: 30069
+      atime2: 31033
+      atime3: 63222
+      atime4: 65535
+      atime5: 65535
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 5
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -3960,7 +3960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8121451398984395719, guid: 3cbe4c8f9b4c6ee45b0d87064449c562, type: 3}
-  bulletSpeed: 75
+  bulletSpeed: 15
   gunPoint: {fileID: 215350658}
   weaponHolder: {fileID: 1354336790}
 --- !u!114 &1746550278
