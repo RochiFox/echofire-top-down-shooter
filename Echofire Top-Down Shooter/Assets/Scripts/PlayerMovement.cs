@@ -20,19 +20,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isRunning;
 
-    private void Awake()
-    {
-        player = GetComponent<Player>();
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
-    }
-
     private void Start()
     {
+        player = GetComponent<Player>();
+
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
+
         speed = walkSpeed;
+
 
         AssignInputEvents();
     }
+
 
     private void Update()
     {
@@ -46,13 +46,12 @@ public class PlayerMovement : MonoBehaviour
         float xVelocity = Vector3.Dot(movementDirection.normalized, transform.right);
         float zVelocity = Vector3.Dot(movementDirection.normalized, transform.forward);
 
-        animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
-        animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
+        animator.SetFloat("xVelocity", xVelocity, .1f, Time.deltaTime);
+        animator.SetFloat("zVelocity", zVelocity, .1f, Time.deltaTime);
 
         bool playRunAnimation = isRunning & movementDirection.magnitude > 0;
         animator.SetBool("isRunning", playRunAnimation);
     }
-
     private void ApplyRotation()
     {
         Vector3 lookingDirection = player.aim.GetMouseHitInfo().point - transform.position;
@@ -61,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
         Quaternion desiredRotation = Quaternion.LookRotation(lookingDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime);
-    }
 
+    }
     private void ApplyMovement()
     {
         movementDirection = new Vector3(moveInput.x, 0, moveInput.y);
@@ -73,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
             characterController.Move(movementDirection * Time.deltaTime * speed);
         }
     }
-
     private void ApplyGravity()
     {
         if (characterController.isGrounded == false)
@@ -82,9 +80,8 @@ public class PlayerMovement : MonoBehaviour
             movementDirection.y = verticalVelocity;
         }
         else
-            verticalVelocity = -0.5f;
+            verticalVelocity = -.5f;
     }
-
     private void AssignInputEvents()
     {
         controls = player.controls;
@@ -97,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             speed = runSpeed;
             isRunning = true;
         };
+
 
         controls.Character.Run.canceled += context =>
         {

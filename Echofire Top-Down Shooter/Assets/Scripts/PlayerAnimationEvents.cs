@@ -6,7 +6,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 {
     private PlayerWeaponVisuals visualController;
 
-    private void Awake()
+    private void Start()
     {
         visualController = GetComponentInParent<PlayerWeaponVisuals>();
     }
@@ -14,7 +14,10 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void ReloadIsOver()
     {
         visualController.MaximizeRigWeight();
+
+        //refill-bullets
     }
+
 
     public void ReturnRig()
     {

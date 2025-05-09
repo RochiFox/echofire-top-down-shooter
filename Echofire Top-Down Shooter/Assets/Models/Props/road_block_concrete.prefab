@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5507751349985238819}
   - component: {fileID: 7589200021405512164}
   - component: {fileID: 8840245876566684152}
-  - component: {fileID: 5012447697985211110}
-  - component: {fileID: 5872701688189686481}
+  - component: {fileID: 2159652393565007604}
+  - component: {fileID: 2536958934572145426}
   m_Layer: 7
   m_Name: road_block_concrete
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5012447697985211110
+--- !u!65 &2159652393565007604
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,9 +104,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.591955, y: 0.2104884, z: 0.5543268}
-  m_Center: {x: 0.000013589859, y: 0.10164151, z: 0}
---- !u!65 &5872701688189686481
+  m_Size: {x: 1.591955, y: 0.20197457, z: 0.5543268}
+  m_Center: {x: 0.000013589859, y: 0.0973846, z: 4.28429e-14}
+--- !u!65 &2536958934572145426
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,5 +125,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.591955, y: 0.77487624, z: 0.18632507}
-  m_Center: {x: 0.000013589859, y: 0.38383543, z: -0.011425018}
+  m_Size: {x: 1.591955, y: 0.84485704, z: 0.15570201}
+  m_Center: {x: 0.000013590033, y: 0.41882583, z: -0.0047430475}
