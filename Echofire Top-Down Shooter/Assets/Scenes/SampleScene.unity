@@ -1712,8 +1712,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon:
     weaponType: 2
-    ammo: 40
-    maxAmmo: 40
+    bulletsInMagazine: 40
+    magazineCapacity: 40
+    totalReserveAmmo: 40
 --- !u!1 &461898882
 GameObject:
   m_ObjectHideFlags: 0
@@ -8434,8 +8435,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeapon:
     weaponType: 0
-    ammo: 0
-    maxAmmo: 10
+    bulletsInMagazine: 0
+    magazineCapacity: 0
+    totalReserveAmmo: 0
   bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
   bulletSpeed: 15
   gunPoint: {fileID: 975376891}
@@ -8443,11 +8445,13 @@ MonoBehaviour:
   maxSlots: 2
   weaponSlots:
   - weaponType: 0
-    ammo: 21
-    maxAmmo: 21
-  - weaponType: 1
-    ammo: 6
-    maxAmmo: 6
+    bulletsInMagazine: 15
+    magazineCapacity: 15
+    totalReserveAmmo: 33
+  - weaponType: 4
+    bulletsInMagazine: 5
+    magazineCapacity: 5
+    totalReserveAmmo: 36
 --- !u!114 &1746550278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14502,7 +14506,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+    'mixamorig:RightHand'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+    'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tTransform 'mixamorig:Head'\n\tTransform
+    'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightHand'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

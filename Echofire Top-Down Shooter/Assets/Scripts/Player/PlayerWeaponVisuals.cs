@@ -45,14 +45,17 @@ public class PlayerWeaponVisuals : MonoBehaviour
     {
         CheckWeaponSwitch();
 
-        if (Input.GetKeyDown(KeyCode.R) && isGrabbingWeapon == false)
-        {
-            anim.SetTrigger("Reload");
-            ReduceRigWeight();
-        }
-
         UpdateRigWigth();
         UpdateLeftHandIKWeight();
+    }
+
+    public void PlayReloadAnimation()
+    {
+        if (isGrabbingWeapon)
+            return;
+
+        anim.SetTrigger("Reload");
+        ReduceRigWeight();
     }
 
     private void UpdateLeftHandIKWeight()
