@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerControls controls { get; private set; }
-    public PlayerAim aim { get; private set; } 
+    public PlayerAim aim { get; private set; }
     public PlayerMovement movement { get; private set; }
     public PlayerWeaponController weapon { get; private set; }
 
@@ -16,10 +16,12 @@ public class Player : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         weapon = GetComponent<PlayerWeaponController>();
     }
+
     private void OnEnable()
     {
         controls.Enable();
     }
+
     private void OnDisable()
     {
         controls.Disable();

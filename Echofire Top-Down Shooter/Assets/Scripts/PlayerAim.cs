@@ -7,7 +7,7 @@ public class PlayerAim : MonoBehaviour
     private PlayerControls controls;
 
     [Header("Aim Viusal - Laser")]
-    [SerializeField] private LineRenderer aimLaser; // this component is on the waepon holder(child of a player)
+    [SerializeField] private LineRenderer aimLaser;
 
     [Header("Aim control")]
     [SerializeField] private Transform aim;
@@ -25,23 +25,27 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private float cameraSensetivity = 5f;
 
     [Space]
-
     [SerializeField] private LayerMask aimLayerMask;
 
     private Vector2 mouseInput;
     private RaycastHit lastKnownMouseHit;
 
-    private void Start()
+    private void Awake()
     {
         player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
         AssignInputEvents();
     }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
             isAimingPrecisly = !isAimingPrecisly;
 
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
             isLockingToTarget = !isLockingToTarget;
 
         UpdateAimVisuals();
@@ -69,29 +73,27 @@ public class PlayerAim : MonoBehaviour
         aimLaser.SetPosition(1, endPoint);
         aimLaser.SetPosition(2, endPoint + laserDirection * laserTipLenght);
     }
+
     private void UpdateAimPosition()
     {
         Transform target = Target();
 
         if (target != null && isLockingToTarget)
         {
-            if(target.GetComponent<Renderer>() != null)
+            if (target.GetComponent<Renderer>() != null)
                 aim.position = target.GetComponent<Renderer>().bounds.center;
             else
                 aim.position = target.position;
 
 
             return;
-        }   
+        }
 
         aim.position = GetMouseHitInfo().point;
 
         if (!isAimingPrecisly)
             aim.position = new Vector3(aim.position.x, transform.position.y + 1, aim.position.z);
     }
-
-
-
 
     public Transform Target()
     {
@@ -104,8 +106,10 @@ public class PlayerAim : MonoBehaviour
 
         return target;
     }
+
     public Transform Aim() => aim;
     public bool CanAimPrecisly() => isAimingPrecisly;
+
     public RaycastHit GetMouseHitInfo()
     {
         Ray ray = Camera.main.ScreenPointToRay(mouseInput);
@@ -120,7 +124,6 @@ public class PlayerAim : MonoBehaviour
     }
 
     #region Camera Region
-
     private void UpdateCameraPosition()
     {
         cameraTarget.position =
@@ -142,7 +145,6 @@ public class PlayerAim : MonoBehaviour
 
         return desiredCameraPosition;
     }
-
     #endregion
 
     private void AssignInputEvents()
@@ -152,5 +154,4 @@ public class PlayerAim : MonoBehaviour
         controls.Character.Aim.performed += context => mouseInput = context.ReadValue<Vector2>();
         controls.Character.Aim.canceled += context => mouseInput = Vector2.zero;
     }
-
 }

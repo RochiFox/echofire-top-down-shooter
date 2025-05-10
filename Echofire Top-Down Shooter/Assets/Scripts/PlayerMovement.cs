@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Player player;
-
     private CharacterController characterController;
     private PlayerControls controls;
     private Animator animator;
@@ -20,15 +19,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isRunning;
 
-    private void Start()
+    private void Awake()
     {
         player = GetComponent<Player>();
-
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+    }
 
+    private void Start()
+    {
         speed = walkSpeed;
-
 
         AssignInputEvents();
     }
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         bool playRunAnimation = isRunning & movementDirection.magnitude > 0;
         animator.SetBool("isRunning", playRunAnimation);
     }
+
     private void ApplyRotation()
     {
         Vector3 lookingDirection = player.aim.GetMouseHitInfo().point - transform.position;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime);
 
     }
+
     private void ApplyMovement()
     {
         movementDirection = new Vector3(moveInput.x, 0, moveInput.y);
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             characterController.Move(movementDirection * Time.deltaTime * speed);
         }
     }
+
     private void ApplyGravity()
     {
         if (characterController.isGrounded == false)
@@ -82,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         else
             verticalVelocity = -.5f;
     }
+
     private void AssignInputEvents()
     {
         controls = player.controls;
@@ -94,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
             speed = runSpeed;
             isRunning = true;
         };
-
 
         controls.Character.Run.canceled += context =>
         {
