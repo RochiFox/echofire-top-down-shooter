@@ -32,16 +32,10 @@ public class PlayerWeaponController : MonoBehaviour
         currentWeapon.ammo = currentWeapon.maxAmmo;
     }
 
-    private void AssignInputEvents()
+    #region Slots managment - Pickup\Equip\Drop Weapon
+    private void EquipWeapon(int index)
     {
-        PlayerControls controls = player.controls;
-
-        controls.Character.Fire.performed += context => Shoot();
-
-        controls.Character.EquipSlot1.performed += context => EquipWeapon(0);
-        controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
-
-        controls.Character.DropCurrentWeapon.performed += context => DropWeapon();
+        currentWeapon = weaponSlots[index];
     }
 
     public void PickupWeapon(Weapon newWeapon)
@@ -55,11 +49,6 @@ public class PlayerWeaponController : MonoBehaviour
         weaponSlots.Add(newWeapon);
     }
 
-    private void EquipWeapon(int index)
-    {
-        currentWeapon = weaponSlots[index];
-    }
-
     private void DropWeapon()
     {
         if (weaponSlots.Count <= 1)
@@ -69,16 +58,12 @@ public class PlayerWeaponController : MonoBehaviour
 
         currentWeapon = weaponSlots[0];
     }
+    #endregion
 
     private void Shoot()
     {
-        if (currentWeapon.ammo <= 0)
-        {
-            Debug.Log("No more bullets");
+        if (currentWeapon.CanShoot() == false)
             return;
-        }
-
-        currentWeapon.ammo--;
 
         GameObject newBullet =
             Instantiate(bulletPrefab, gunPoint.position, Quaternion.LookRotation(gunPoint.forward));
@@ -105,4 +90,18 @@ public class PlayerWeaponController : MonoBehaviour
     }
 
     public Transform GunPoint() => gunPoint;
+
+    #region Input Events
+    private void AssignInputEvents()
+    {
+        PlayerControls controls = player.controls;
+
+        controls.Character.Fire.performed += context => Shoot();
+
+        controls.Character.EquipSlot1.performed += context => EquipWeapon(0);
+        controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
+
+        controls.Character.DropCurrentWeapon.performed += context => DropWeapon();
+    }
+    #endregion
 }
