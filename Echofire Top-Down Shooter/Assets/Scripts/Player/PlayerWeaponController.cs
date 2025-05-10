@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Transform weaponHolder;
 
     [Header("Inventory")]
+    [SerializeField] private int maxSlots = 2;
     [SerializeField] private List<Weapon> weaponSlots;
 
     private void Awake()
@@ -40,6 +42,17 @@ public class PlayerWeaponController : MonoBehaviour
         controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
 
         controls.Character.DropCurrentWeapon.performed += context => DropWeapon();
+    }
+
+    public void PickupWeapon(Weapon newWeapon)
+    {
+        if (weaponSlots.Count >= maxSlots)
+        {
+            Debug.Log("No slots available");
+            return;
+        }
+
+        weaponSlots.Add(newWeapon);
     }
 
     private void EquipWeapon(int index)
