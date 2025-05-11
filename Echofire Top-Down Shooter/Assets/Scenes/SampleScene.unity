@@ -4182,7 +4182,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0.079, y: 6.196152, z: -2.13}
+  m_LocalPosition: {x: 0.0608, y: 5.225152, z: -3.7640998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5919,7 +5919,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 2141233248}
+  m_Follow: {fileID: 1746550274}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -5948,7 +5948,7 @@ Transform:
   m_GameObject: {fileID: 1259482826}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0.079, y: 6.196152, z: -2.13}
+  m_LocalPosition: {x: 0.0608, y: 5.225152, z: -3.7640998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8569,17 +8569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4379c6f13fa71e94aaa2d5c2e8b4a2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTransforms:
-  - {fileID: 945351316}
-  - {fileID: 1073298058}
-  - {fileID: 1201845089}
-  - {fileID: 524216052}
-  - {fileID: 1974358293}
-  pistol: {fileID: 945351316}
-  revolver: {fileID: 1073298058}
-  autoRifle: {fileID: 1201845089}
-  shotgun: {fileID: 524216052}
-  rifle: {fileID: 1974358293}
+  weaponModels: []
   rigWeightIncreaseRate: 2.75
   leftHandIkWeightIncreaseRate: 2.5
   leftHandIK: {fileID: 1996614115}

@@ -19,7 +19,6 @@ public class PlayerAnimationEvents : MonoBehaviour
         weaponController.CurrentWeapon().RefillBullets();
     }
 
-
     public void ReturnRig()
     {
         visualController.MaximizeRigWeight();
@@ -30,4 +29,6 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         visualController.SetBusyGrabbingWeaponTo(false);
     }
+
+    public void SwitchOnWeaponModel() => visualController.SwitchOnCurrentWeaponModel();
 }

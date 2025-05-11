@@ -30,10 +30,17 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     private void Update()
     {
-        CheckWeaponSwitch();
-
         UpdateRigWigth();
         UpdateLeftHandIKWeight();
+    }
+
+    public void PlayReloadAnimation()
+    {
+        if (isGrabbingWeapon)
+            return;
+
+        anim.SetTrigger("Reload");
+        ReduceRigWeight();
     }
 
     public WeaponModel CurrentWeaponModel()
@@ -52,13 +59,13 @@ public class PlayerWeaponVisuals : MonoBehaviour
         return weaponModel;
     }
 
-    public void PlayReloadAnimation()
+    #region Animation Rigging Methods
+    private void AttachLeftHand()
     {
-        if (isGrabbingWeapon)
-            return;
+        Transform targetTransform = CurrentWeaponModel().holdPoint;
 
-        anim.SetTrigger("Reload");
-        ReduceRigWeight();
+        leftHandIK_Target.localPosition = targetTransform.localPosition;
+        leftHandIK_Target.localRotation = targetTransform.localRotation;
     }
 
     private void UpdateLeftHandIKWeight()
@@ -88,8 +95,14 @@ public class PlayerWeaponVisuals : MonoBehaviour
         rig.weight = .15f;
     }
 
-    private void PlayWeaponGrabAnimation(GrabType grabType)
+    public void MaximizeRigWeight() => shouldIncrease_RigWeight = true;
+    public void MaximizeLeftHandWeight() => shouldIncrease_LeftHandIKWieght = true;
+    #endregion
+
+    public void PlayWeaponEquipAnimation()
     {
+        GrabType grabType = CurrentWeaponModel().grabType;
+
         leftHandIK.weight = 0;
         ReduceRigWeight();
         anim.SetFloat("WeaponGrabType", ((float)grabType));
@@ -104,30 +117,21 @@ public class PlayerWeaponVisuals : MonoBehaviour
         anim.SetBool("BusyGrabbingWeapon", isGrabbingWeapon);
     }
 
-    public void MaximizeRigWeight() => shouldIncrease_RigWeight = true;
-    public void MaximizeLeftHandWeight() => shouldIncrease_LeftHandIKWieght = true;
-
-    private void SwitchOn()
+    public void SwitchOnCurrentWeaponModel()
     {
-        SwitchOffWeaponModels();
+        int animationIndex = (int)CurrentWeaponModel().holdType;
+
+        SwitchAnimationLayer(animationIndex);
         CurrentWeaponModel().gameObject.SetActive(true);
         AttachLeftHand();
     }
 
-    private void SwitchOffWeaponModels()
+    public void SwitchOffWeaponModels()
     {
         for (int i = 0; i < weaponModels.Length; i++)
         {
             weaponModels[i].gameObject.SetActive(false);
         }
-    }
-
-    private void AttachLeftHand()
-    {
-        Transform targetTransform = CurrentWeaponModel().holdPoint;
-
-        leftHandIK_Target.localPosition = targetTransform.localPosition;
-        leftHandIK_Target.localRotation = targetTransform.localRotation;
     }
 
     private void SwitchAnimationLayer(int layerIndex)
@@ -138,44 +142,5 @@ public class PlayerWeaponVisuals : MonoBehaviour
         }
 
         anim.SetLayerWeight(layerIndex, 1);
-    }
-
-    private void CheckWeaponSwitch()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SwitchOn();
-            SwitchAnimationLayer(1);
-            PlayWeaponGrabAnimation(GrabType.SideGrab);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-
-            SwitchOn();
-            SwitchAnimationLayer(1);
-            PlayWeaponGrabAnimation(GrabType.SideGrab);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SwitchOn();
-            SwitchAnimationLayer(1);
-            PlayWeaponGrabAnimation(GrabType.BackGrab);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SwitchOn();
-            SwitchAnimationLayer(2);
-            PlayWeaponGrabAnimation(GrabType.BackGrab);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SwitchOn();
-            SwitchAnimationLayer(3);
-            PlayWeaponGrabAnimation(GrabType.BackGrab);
-        }
     }
 }
