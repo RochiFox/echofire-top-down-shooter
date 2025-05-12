@@ -29,8 +29,10 @@ public class PlayerWeaponController : MonoBehaviour
     {
         AssignInputEvents();
 
-        currentWeapon.bulletsInMagazine = currentWeapon.totalReserveAmmo;
+        Invoke("EquipStartingWeapon", 0.1f);
     }
+
+    private void EquipStartingWeapon() => EquipWeapon(0);
 
     #region Slots managment - Pickup\Equip\Drop Weapon
     private void EquipWeapon(int index)
