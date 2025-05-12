@@ -1679,6 +1679,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 362703499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &429299453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429299455}
+  - component: {fileID: 429299454}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &429299454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429299453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f7cb90f95153e489c3f81bac363a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
+  poolSize: 50
+--- !u!4 &429299455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429299453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2032495, y: 0.51742285, z: -2.9199195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &431961606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 163471613098948771, guid: 45ffdefacca02d845824804ad306e21b, type: 3}
@@ -1762,6 +1808,8 @@ MonoBehaviour:
     bulletsInMagazine: 40
     magazineCapacity: 40
     totalReserveAmmo: 40
+    reloadSpeed: 1
+    equipmentSpeed: 1
 --- !u!1 &461898882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,7 +2584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
-  grabType: 1
+  equipAnimationType: 0
   holdType: 2
   gunPoint: {fileID: 1766000397}
   holdPoint: {fileID: 2078607759}
@@ -4120,7 +4168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
-  grabType: 0
+  equipAnimationType: 0
   holdType: 1
   gunPoint: {fileID: 975376891}
   holdPoint: {fileID: 1675843671}
@@ -4930,7 +4978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  grabType: 0
+  equipAnimationType: 0
   holdType: 1
   gunPoint: {fileID: 1777278628}
   holdPoint: {fileID: 166916586}
@@ -5794,7 +5842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
-  grabType: 1
+  equipAnimationType: 0
   holdType: 1
   gunPoint: {fileID: 1279827382}
   holdPoint: {fileID: 1658848704}
@@ -8731,6 +8779,8 @@ MonoBehaviour:
     bulletsInMagazine: 0
     magazineCapacity: 0
     totalReserveAmmo: 0
+    reloadSpeed: 1
+    equipmentSpeed: 1
   bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
   bulletSpeed: 15
   gunPoint: {fileID: 975376891}
@@ -8741,10 +8791,14 @@ MonoBehaviour:
     bulletsInMagazine: 15
     magazineCapacity: 15
     totalReserveAmmo: 33
+    reloadSpeed: 1
+    equipmentSpeed: 1
   - weaponType: 4
     bulletsInMagazine: 5
     magazineCapacity: 5
     totalReserveAmmo: 36
+    reloadSpeed: 1
+    equipmentSpeed: 1
 --- !u!114 &1746550278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10409,7 +10463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 4
-  grabType: 1
+  equipAnimationType: 0
   holdType: 3
   gunPoint: {fileID: 1854675550}
   holdPoint: {fileID: 1155908563}
@@ -15453,3 +15507,4 @@ SceneRoots:
   - {fileID: 2141233248}
   - {fileID: 489048668}
   - {fileID: 461672719}
+  - {fileID: 429299455}

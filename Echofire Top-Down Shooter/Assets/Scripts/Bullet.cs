@@ -6,12 +6,12 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject bulletImpactFX;
 
-    private Rigidbody rb => GetComponent<Rigidbody>(); 
+    private Rigidbody rb => GetComponent<Rigidbody>();
 
     private void OnCollisionEnter(Collision collision)
     {
         CreateImpactFx(collision);
-        Destroy(gameObject);
+        ObjectPool.instance.ReturnBullet(gameObject);
     }
 
     private void CreateImpactFx(Collision collision)
