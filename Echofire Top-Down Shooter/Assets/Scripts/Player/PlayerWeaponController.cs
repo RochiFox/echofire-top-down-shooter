@@ -8,11 +8,11 @@ public class PlayerWeaponController : MonoBehaviour
     private const float REFERENCE_BULLET_SPEED = 20;
 
     [SerializeField] private Weapon currentWeapon;
+    private bool weaponReady;
 
     [Header("Bullet details")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private Transform gunPoint;
 
     [SerializeField] private Transform weaponHolder;
 
@@ -34,9 +34,11 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void EquipStartingWeapon() => EquipWeapon(0);
 
-    #region Slots managment - Pickup\Equip\Drop Weapon
+    #region Slots managment - Pickup\Equip\Drop\Ready Weapon
     private void EquipWeapon(int index)
     {
+        SetWeaponReady(false);
+
         currentWeapon = weaponSlots[index];
 
         player.weaponVisuals.PlayWeaponEquipAnimation();
@@ -63,31 +65,43 @@ public class PlayerWeaponController : MonoBehaviour
         weaponSlots.Remove(currentWeapon);
         EquipWeapon(0);
     }
+
+    public void SetWeaponReady(bool ready) => weaponReady = ready;
+    public bool WeaponReady() => weaponReady;
     #endregion
 
     private void Shoot()
     {
+        if (WeaponReady() == false) 
+            return;
+
         if (currentWeapon.CanShoot() == false)
             return;
 
         GameObject newBullet = ObjectPool.instance.GetBullet();
 
-        newBullet.transform.position = gunPoint.position;
-        newBullet.transform.rotation = Quaternion.LookRotation(gunPoint.forward);
+        newBullet.transform.position = GunPoint().position;
+        newBullet.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
 
         Rigidbody rbNewBullet = newBullet.GetComponent<Rigidbody>();
 
         rbNewBullet.mass = REFERENCE_BULLET_SPEED / bulletSpeed;
         rbNewBullet.velocity = BulletDirection() * bulletSpeed;
 
-        GetComponentInChildren<Animator>().SetTrigger("Fire");
+        player.weaponVisuals.PlayFireAnimation();
+    }
+
+    private void Reload()
+    {
+        SetWeaponReady(false);
+        player.weaponVisuals.PlayReloadAnimation();
     }
 
     public Vector3 BulletDirection()
     {
         Transform aim = player.aim.Aim();
 
-        Vector3 direction = (aim.position - gunPoint.position).normalized;
+        Vector3 direction = (aim.position - GunPoint().position).normalized;
 
         if (player.aim.CanAimPrecisly() == false && player.aim.Target() == null)
             direction.y = 0;
@@ -112,7 +126,7 @@ public class PlayerWeaponController : MonoBehaviour
         return null;
     }
 
-    public Transform GunPoint() => gunPoint;
+    public Transform GunPoint() => player.weaponVisuals.CurrentWeaponModel().gunPoint;
 
     #region Input Events
     private void AssignInputEvents()
@@ -128,9 +142,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         controls.Character.Reload.performed += context =>
         {
-            if (currentWeapon.CanReload())
+            if (currentWeapon.CanReload() && WeaponReady())
             {
-                player.weaponVisuals.PlayReloadAnimation();
+                Reload();
             }
         };
     }
