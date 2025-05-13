@@ -1812,6 +1812,9 @@ MonoBehaviour:
     totalReserveAmmo: 40
     reloadSpeed: 1
     equipmentSpeed: 1
+    baseSpread: 0
+    maxSpread: 3
+    spreadIncreaseRate: 0.15
 --- !u!1 &461898882
 GameObject:
   m_ObjectHideFlags: 0
@@ -8785,6 +8788,9 @@ MonoBehaviour:
     totalReserveAmmo: 0
     reloadSpeed: 1
     equipmentSpeed: 1
+    baseSpread: 0
+    maxSpread: 3
+    spreadIncreaseRate: 0.15
   bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
   bulletSpeed: 15
   weaponHolder: {fileID: 1354336790}
@@ -8798,6 +8804,9 @@ MonoBehaviour:
     totalReserveAmmo: 33
     reloadSpeed: 1
     equipmentSpeed: 1
+    baseSpread: 1
+    maxSpread: 1
+    spreadIncreaseRate: 0.15
   - weaponType: 2
     shootType: 1
     fireRate: 7
@@ -8806,6 +8815,9 @@ MonoBehaviour:
     totalReserveAmmo: 90
     reloadSpeed: 1
     equipmentSpeed: 1
+    baseSpread: 1
+    maxSpread: 3
+    spreadIncreaseRate: 0.15
 --- !u!114 &1746550278
 MonoBehaviour:
   m_ObjectHideFlags: 0
