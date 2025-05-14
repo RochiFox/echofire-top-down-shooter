@@ -8858,7 +8858,7 @@ MonoBehaviour:
   rigWeightIncreaseRate: 2.75
   leftHandIkWeightIncreaseRate: 2.5
   leftHandIK: {fileID: 1996614115}
-  leftHandIK_Target: {fileID: 196510486}
+  leftHandIKTarget: {fileID: 196510486}
 --- !u!114 &1746550279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8873,12 +8873,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLaser: {fileID: 1669532594}
   aim: {fileID: 489048668}
-  isAimingPrecisly: 0
+  isAimingPrecisely: 0
   isLockingToTarget: 1
   cameraTarget: {fileID: 2141233248}
   minCameraDistance: 1
   maxCameraDistance: 2
-  cameraSensetivity: 3.5
+  cameraSensitivity: 5
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 2240

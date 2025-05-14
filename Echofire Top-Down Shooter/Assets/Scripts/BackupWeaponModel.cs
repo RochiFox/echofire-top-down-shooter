@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public enum HangType
@@ -15,5 +14,5 @@ public class BackupWeaponModel : MonoBehaviour
 
     public void Activate(bool activated) => gameObject.SetActive(activated);
 
-    public bool HangTypeIs(HangType hangType) => this.hangType == hangType;
+    public bool HangTypeIs(HangType hangTypeParam) => this.hangType == hangTypeParam;
 }

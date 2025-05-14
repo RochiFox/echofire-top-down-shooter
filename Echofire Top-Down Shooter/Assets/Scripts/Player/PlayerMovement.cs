@@ -2,19 +2,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int XVelocity = Animator.StringToHash("xVelocity");
+    private static readonly int ZVelocity = Animator.StringToHash("zVelocity");
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+
     private Player player;
     private CharacterController characterController;
     private PlayerControls controls;
     private Animator animator;
 
-    [Header("Movement info")]
-    [SerializeField] private float walkSpeed;
+    [Header("Movement info")] [SerializeField]
+    private float walkSpeed;
+
     [SerializeField] private float runSpeed;
     [SerializeField] private float turnSpeed;
     private float speed;
     private float verticalVelocity;
 
-    public Vector2 moveInput { get; private set; }
+    public Vector2 MoveInput { get; private set; }
     private Vector3 movementDirection;
 
     private bool isRunning;
@@ -46,32 +51,31 @@ public class PlayerMovement : MonoBehaviour
         float xVelocity = Vector3.Dot(movementDirection.normalized, transform.right);
         float zVelocity = Vector3.Dot(movementDirection.normalized, transform.forward);
 
-        animator.SetFloat("xVelocity", xVelocity, .1f, Time.deltaTime);
-        animator.SetFloat("zVelocity", zVelocity, .1f, Time.deltaTime);
+        animator.SetFloat(XVelocity, xVelocity, .1f, Time.deltaTime);
+        animator.SetFloat(ZVelocity, zVelocity, .1f, Time.deltaTime);
 
         bool playRunAnimation = isRunning & movementDirection.magnitude > 0;
-        animator.SetBool("isRunning", playRunAnimation);
+        animator.SetBool(IsRunning, playRunAnimation);
     }
 
     private void ApplyRotation()
     {
-        Vector3 lookingDirection = player.aim.GetMouseHitInfo().point - transform.position;
+        Vector3 lookingDirection = player.Aim.GetMouseHitInfo().point - transform.position;
         lookingDirection.y = 0f;
         lookingDirection.Normalize();
 
         Quaternion desiredRotation = Quaternion.LookRotation(lookingDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime);
-
     }
 
     private void ApplyMovement()
     {
-        movementDirection = new Vector3(moveInput.x, 0, moveInput.y);
+        movementDirection = new Vector3(MoveInput.x, 0, MoveInput.y);
         ApplyGravity();
 
         if (movementDirection.magnitude > 0)
         {
-            characterController.Move(movementDirection * Time.deltaTime * speed);
+            characterController.Move(movementDirection * (Time.deltaTime * speed));
         }
     }
 
@@ -88,18 +92,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputEvents()
     {
-        controls = player.controls;
+        controls = player.Controls;
 
-        controls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
-        controls.Character.Movement.canceled += context => moveInput = Vector2.zero;
+        controls.Character.Movement.performed += context => MoveInput = context.ReadValue<Vector2>();
+        controls.Character.Movement.canceled += _ => MoveInput = Vector2.zero;
 
-        controls.Character.Run.performed += context =>
+        controls.Character.Run.performed += _ =>
         {
             speed = runSpeed;
             isRunning = true;
         };
 
-        controls.Character.Run.canceled += context =>
+        controls.Character.Run.canceled += _ =>
         {
             speed = walkSpeed;
             isRunning = false;

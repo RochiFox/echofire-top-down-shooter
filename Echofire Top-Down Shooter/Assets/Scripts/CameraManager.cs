@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (!instance)
             instance = this;
         else
         {

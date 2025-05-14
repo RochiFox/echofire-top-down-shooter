@@ -48,19 +48,16 @@ public class Weapon
     public float spreadIncreaseRate = 0.15f;
 
     private float lastSpreadUpdateTime;
-    private float spreadCooldown = 1;
+    private const float SpreadCooldown = 1;
 
     #region Burst methods
 
     public bool BurstActivated()
     {
-        if (weaponType == WeaponType.Shotgun)
-        {
-            burstFireDelay = 0;
-            return true;
-        }
+        if (weaponType != WeaponType.Shotgun) return burstActive;
 
-        return burstActive;
+        burstFireDelay = 0;
+        return true;
     }
 
     public void ToggleBurst()
@@ -88,13 +85,10 @@ public class Weapon
 
     private bool ReadyToFire()
     {
-        if (Time.time > lastShootTime + 1 / fireRate)
-        {
-            lastShootTime = Time.time;
-            return true;
-        }
+        if (!(Time.time > lastShootTime + 1 / fireRate)) return false;
 
-        return false;
+        lastShootTime = Time.time;
+        return true;
     }
 
     #region Spread methods
@@ -112,7 +106,7 @@ public class Weapon
 
     private void UpdateSpread()
     {
-        if (Time.time > lastSpreadUpdateTime + spreadCooldown)
+        if (Time.time > lastSpreadUpdateTime + SpreadCooldown)
             currentSpread = baseSpread;
         else
             IncreaseSpread();
@@ -136,10 +130,7 @@ public class Weapon
         if (bulletsInMagazine == magazineCapacity)
             return false;
 
-        if (totalReserveAmmo > 0)
-            return true;
-
-        return false;
+        return totalReserveAmmo > 0;
     }
 
     public void RefillBullets()

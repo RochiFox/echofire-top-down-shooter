@@ -3,7 +3,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private BoxCollider cd;
-    private Rigidbody rb;
     private TrailRenderer trailRenderer;
     private MeshRenderer meshRenderer;
 
@@ -16,12 +15,11 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         cd = GetComponent<BoxCollider>();
-        rb = GetComponent<Rigidbody>();
         trailRenderer = GetComponent<TrailRenderer>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    public void BulletSetup(float flyDistance)
+    public void BulletSetup(float flyDistanceParam)
     {
         bulletDisabled = false;
         cd.enabled = true;
@@ -29,7 +27,7 @@ public class Bullet : MonoBehaviour
 
         trailRenderer.time = 0.25f;
         startPosition = transform.position;
-        this.flyDistance = flyDistance + 1;
+        this.flyDistance = flyDistanceParam + 1;
     }
 
     private void Update()
@@ -47,12 +45,11 @@ public class Bullet : MonoBehaviour
 
     private void DisableBulletIfNeeded()
     {
-        if (Vector3.Distance(startPosition, transform.position) > flyDistance && !bulletDisabled)
-        {
-            bulletDisabled = true;
-            cd.enabled = false;
-            meshRenderer.enabled = false;
-        }
+        if (!(Vector3.Distance(startPosition, transform.position) > flyDistance) || bulletDisabled) return;
+
+        bulletDisabled = true;
+        cd.enabled = false;
+        meshRenderer.enabled = false;
     }
 
     private void FadeTrailIfNeeded()
@@ -69,14 +66,13 @@ public class Bullet : MonoBehaviour
 
     private void CreateImpactFx(Collision collision)
     {
-        if (collision.contacts.Length > 0)
-        {
-            ContactPoint contact = collision.contacts[0];
+        if (collision.contacts.Length <= 0) return;
 
-            GameObject newImpactFx =
-                Instantiate(bulletImpactFX, contact.point, Quaternion.LookRotation(contact.normal));
+        ContactPoint contact = collision.contacts[0];
 
-            Destroy(newImpactFx, 1f);
-        }
+        GameObject newImpactFx =
+            Instantiate(bulletImpactFX, contact.point, Quaternion.LookRotation(contact.normal));
+
+        Destroy(newImpactFx, 1f);
     }
 }
