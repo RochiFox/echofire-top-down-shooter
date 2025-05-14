@@ -38,9 +38,6 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (isShooting)
             Shoot();
-
-        if (Input.GetKeyDown(KeyCode.T))
-            currentWeapon.ToggleBurst();
     }
 
     private void EquipStartingWeapon() => EquipWeapon(0);
@@ -164,31 +161,18 @@ public class PlayerWeaponController : MonoBehaviour
 
     public bool HasOnlyOneWeapon() => weaponSlots.Count <= 1;
 
-    public bool HasWeaponTypeInInventory(WeaponType weaponType)
+    public Weapon WeaponInSlots(WeaponType weaponType)
     {
         foreach (Weapon weapon in weaponSlots)
         {
             if (weapon.weaponType == weaponType)
-                return true;
-        }
-
-        return false;
-    }
-
-    public Weapon CurrentWeapon() => currentWeapon;
-
-    public Weapon BackupWeapon()
-    {
-        foreach (Weapon weapon in weaponSlots)
-        {
-            if (weapon != currentWeapon)
-            {
                 return weapon;
-            }
         }
 
         return null;
     }
+
+    public Weapon CurrentWeapon() => currentWeapon;
 
     public Transform GunPoint() => player.weaponVisuals.CurrentWeaponModel().gunPoint;
 
@@ -216,6 +200,8 @@ public class PlayerWeaponController : MonoBehaviour
                 Reload();
             }
         };
+
+        controls.Character.ToggleWeaponMode.performed += context => currentWeapon.ToggleBurst();
     }
 
     #endregion

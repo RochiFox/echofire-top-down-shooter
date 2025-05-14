@@ -6,26 +6,23 @@ public class PlayerAim : MonoBehaviour
     private Player player;
     private PlayerControls controls;
 
-    [Header("Aim Viusal - Laser")]
-    [SerializeField] private LineRenderer aimLaser;
+    [Header("Aim Viusal - Laser")] [SerializeField]
+    private LineRenderer aimLaser;
 
-    [Header("Aim control")]
-    [SerializeField] private Transform aim;
+    [Header("Aim control")] [SerializeField]
+    private Transform aim;
 
     [SerializeField] private bool isAimingPrecisly;
     [SerializeField] private bool isLockingToTarget;
 
-    [Header("Camera control")]
-    [SerializeField] private Transform cameraTarget;
-    [Range(.5f, 2f)]
-    [SerializeField] private float minCameraDistance = 1.5f;
-    [Range(1, 4f)]
-    [SerializeField] private float maxCameraDistance = 4;
-    [Range(3f, 5f)]
-    [SerializeField] private float cameraSensetivity = 5f;
+    [Header("Camera control")] [SerializeField]
+    private Transform cameraTarget;
 
-    [Space]
-    [SerializeField] private LayerMask aimLayerMask;
+    [Range(.5f, 2f)] [SerializeField] private float minCameraDistance = 1.5f;
+    [Range(1, 4f)] [SerializeField] private float maxCameraDistance = 4;
+    [Range(3f, 5f)] [SerializeField] private float cameraSensetivity = 5f;
+
+    [Space] [SerializeField] private LayerMask aimLayerMask;
 
     private Vector2 mouseInput;
     private RaycastHit lastKnownMouseHit;
@@ -133,10 +130,11 @@ public class PlayerAim : MonoBehaviour
     }
 
     #region Camera Region
+
     private void UpdateCameraPosition()
     {
         cameraTarget.position =
-                    Vector3.Lerp(cameraTarget.position, DesieredCameraPosition(), cameraSensetivity * Time.deltaTime);
+            Vector3.Lerp(cameraTarget.position, DesieredCameraPosition(), cameraSensetivity * Time.deltaTime);
     }
 
     private Vector3 DesieredCameraPosition()
@@ -154,6 +152,7 @@ public class PlayerAim : MonoBehaviour
 
         return desiredCameraPosition;
     }
+
     #endregion
 
     private void AssignInputEvents()
