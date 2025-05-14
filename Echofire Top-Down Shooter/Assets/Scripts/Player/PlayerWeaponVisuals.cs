@@ -9,13 +9,13 @@ public class PlayerWeaponVisuals : MonoBehaviour
     [SerializeField] private WeaponModel[] weaponModels;
     [SerializeField] private BackupWeaponModel[] backupWeaponModels;
 
-    [Header("Rig ")]
-    [SerializeField] private float rigWeightIncreaseRate;
+    [Header("Rig ")] [SerializeField] private float rigWeightIncreaseRate;
     private bool shouldIncrease_RigWeight;
     private Rig rig;
 
-    [Header("Left hand IK")]
-    [SerializeField] private float leftHandIkWeightIncreaseRate;
+    [Header("Left hand IK")] [SerializeField]
+    private float leftHandIkWeightIncreaseRate;
+
     [SerializeField] private TwoBoneIKConstraint leftHandIK;
     [SerializeField] private Transform leftHandIK_Target;
     private bool shouldIncrease_LeftHandIKWieght;
@@ -63,6 +63,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
     }
 
     #region Animation Rigging Methods
+
     private void AttachLeftHand()
     {
         Transform targetTransform = CurrentWeaponModel().holdPoint;
@@ -100,6 +101,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     public void MaximizeRigWeight() => shouldIncrease_RigWeight = true;
     public void MaximizeLeftHandWeight() => shouldIncrease_LeftHandIKWieght = true;
+
     #endregion
 
     public void PlayWeaponEquipAnimation()
@@ -141,18 +143,38 @@ public class PlayerWeaponVisuals : MonoBehaviour
     private void SwitchOffBackupWeaponModels()
     {
         foreach (BackupWeaponModel backupModel in backupWeaponModels)
-            backupModel.gameObject.SetActive(false);
+            backupModel.Activate(false);
     }
 
     public void SwitchOnBackupWeaponModel()
     {
-        WeaponType weaponType = player.weapon.BackupWeapon().weaponType;
+        SwitchOffBackupWeaponModels();
+
+        BackupWeaponModel lowHangWeapon = null;
+        BackupWeaponModel backHangWeapon = null;
+        BackupWeaponModel sideHangWeapon = null;
 
         foreach (BackupWeaponModel backupModel in backupWeaponModels)
         {
-            if (backupModel.weaponType == weaponType)
-                backupModel.gameObject.SetActive(true);
+            if (backupModel.weaponType == player.weapon.CurrentWeapon().weaponType)
+                continue;
+
+            if (player.weapon.HasWeaponTypeInInventory(backupModel.weaponType))
+            {
+                if (backupModel.HangTypeIs(HangType.LowBackHang))
+                    lowHangWeapon = backupModel;
+
+                if (backupModel.HangTypeIs(HangType.BackHang))
+                    backHangWeapon = backupModel;
+
+                if (backupModel.HangTypeIs(HangType.SideHang))
+                    sideHangWeapon = backupModel;
+            }
         }
+
+        lowHangWeapon?.Activate(true);
+        backHangWeapon?.Activate(true);
+        sideHangWeapon?.Activate(true);
     }
 
     private void SwitchAnimationLayer(int layerIndex)
