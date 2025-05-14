@@ -20,35 +20,29 @@ public class Weapon
 {
     public WeaponType weaponType;
 
-    [Header("Shooting specifics")]
-    public ShootType shootType;
+    [Header("Shooting specifics")] public ShootType shootType;
     public int bulletsPerShot;
     public float defaultFireRate;
     public float fireRate = 1; // bullets per second
     private float lastShootTime;
 
-    [Header("Burst fire")]
-    public bool burstAvailable;
+    [Header("Burst fire")] public bool burstAvailable;
     public bool burstActive;
 
     public int burstBulletsPerShot;
     public float burstFireRate;
     public float burstFireDelay = 0.1f;
 
-    [Header("Ammo details")]
-    public int bulletsInMagazine;
+    [Header("Ammo details")] public int bulletsInMagazine;
     public int magazineCapacity;
     public int totalReserveAmmo;
 
-    [Range(1, 2)]
-    public float reloadSpeed = 1;
-    [Range(1, 2)]
-    public float equipmentSpeed = 1;
-    [Range(2, 12)]
-    public float gunDistance = 4;
+    [Range(1, 2)] public float reloadSpeed = 1;
+    [Range(1, 2)] public float equipmentSpeed = 1;
+    [Range(2, 12)] public float gunDistance = 4;
+    [Range(3, 8)] public float cameraDistance;
 
-    [Header("Spread")]
-    public float baseSpread = 1;
+    [Header("Spread")] public float baseSpread = 1;
     private float currentSpread;
     public float maxSpread = 3;
     public float spreadIncreaseRate = 0.15f;
@@ -57,6 +51,7 @@ public class Weapon
     private float spreadCooldown = 1;
 
     #region Burst methods
+
     public bool BurstActivated()
     {
         if (weaponType == WeaponType.Shotgun)
@@ -86,6 +81,7 @@ public class Weapon
             fireRate = defaultFireRate;
         }
     }
+
     #endregion
 
     public bool CanShoot() => HaveEnoughBullets() && ReadyToFire();
@@ -102,6 +98,7 @@ public class Weapon
     }
 
     #region Spread methods
+
     public Vector3 ApplySpread(Vector3 originalDirection)
     {
         UpdateSpread();
@@ -127,9 +124,11 @@ public class Weapon
     {
         currentSpread = Mathf.Clamp(currentSpread + spreadIncreaseRate, baseSpread, maxSpread);
     }
+
     #endregion
 
     #region Reload methods
+
     private bool HaveEnoughBullets() => bulletsInMagazine > 0;
 
     public bool CanReload()
@@ -156,5 +155,6 @@ public class Weapon
         if (totalReserveAmmo < 0)
             totalReserveAmmo = 0;
     }
+
     #endregion
 }

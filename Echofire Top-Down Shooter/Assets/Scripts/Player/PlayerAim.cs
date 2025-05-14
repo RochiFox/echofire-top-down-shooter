@@ -17,9 +17,9 @@ public class PlayerAim : MonoBehaviour
 
     [Header("Camera control")]
     [SerializeField] private Transform cameraTarget;
-    [Range(.5f, 1)]
+    [Range(.5f, 2f)]
     [SerializeField] private float minCameraDistance = 1.5f;
-    [Range(1, 3f)]
+    [Range(1, 4f)]
     [SerializeField] private float maxCameraDistance = 4;
     [Range(3f, 5f)]
     [SerializeField] private float cameraSensetivity = 5f;
@@ -141,7 +141,7 @@ public class PlayerAim : MonoBehaviour
 
     private Vector3 DesieredCameraPosition()
     {
-        float actualMaxCameraDistance = player.movement.moveInput.y < -.5f ? minCameraDistance : maxCameraDistance;
+        float actualMaxCameraDistance = player.movement.moveInput.y < -0.5f ? minCameraDistance : maxCameraDistance;
 
         Vector3 desiredCameraPosition = GetMouseHitInfo().point;
         Vector3 aimDirection = (desiredCameraPosition - transform.position).normalized;

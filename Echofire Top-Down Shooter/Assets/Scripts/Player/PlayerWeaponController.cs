@@ -12,14 +12,14 @@ public class PlayerWeaponController : MonoBehaviour
     private bool weaponReady;
     private bool isShooting;
 
-    [Header("Bullet details")]
-    [SerializeField] private GameObject bulletPrefab;
+    [Header("Bullet details")] [SerializeField]
+    private GameObject bulletPrefab;
+
     [SerializeField] private float bulletSpeed;
 
     [SerializeField] private Transform weaponHolder;
 
-    [Header("Inventory")]
-    [SerializeField] private int maxSlots = 2;
+    [Header("Inventory")] [SerializeField] private int maxSlots = 2;
     [SerializeField] private List<Weapon> weaponSlots;
 
     private void Awake()
@@ -46,13 +46,15 @@ public class PlayerWeaponController : MonoBehaviour
     private void EquipStartingWeapon() => EquipWeapon(0);
 
     #region Slots managment - Pickup\Equip\Drop\Ready Weapon
+
     private void EquipWeapon(int index)
     {
         SetWeaponReady(false);
 
         currentWeapon = weaponSlots[index];
-
         player.weaponVisuals.PlayWeaponEquipAnimation();
+
+        CameraManager.instance.ChangeCameraDistance(currentWeapon.cameraDistance);
     }
 
     public void PickupWeapon(Weapon newWeapon)
@@ -79,6 +81,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void SetWeaponReady(bool ready) => weaponReady = ready;
     public bool WeaponReady() => weaponReady;
+
     #endregion
 
     private IEnumerator BurstFire()
@@ -176,6 +179,7 @@ public class PlayerWeaponController : MonoBehaviour
     public Transform GunPoint() => player.weaponVisuals.CurrentWeaponModel().gunPoint;
 
     #region Input Events
+
     private void AssignInputEvents()
     {
         PlayerControls controls = player.controls;
@@ -196,5 +200,6 @@ public class PlayerWeaponController : MonoBehaviour
             }
         };
     }
+
     #endregion
 }
