@@ -40,7 +40,11 @@ public class PlayerWeaponController : MonoBehaviour
             Shoot();
     }
 
-    private void EquipStartingWeapon() => EquipWeapon(0);
+    private void EquipStartingWeapon()
+    {
+        weaponSlots[0] = new Weapon(WeaponType.Pistol);
+        EquipWeapon(0);
+    }
 
     #region Slots managment - Pickup\Equip\Drop\Ready Weapon
 

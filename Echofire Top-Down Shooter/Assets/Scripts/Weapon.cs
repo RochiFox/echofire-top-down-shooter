@@ -50,6 +50,12 @@ public class Weapon
     private float lastSpreadUpdateTime;
     private const float SpreadCooldown = 1;
 
+    public Weapon(WeaponType weaponType)
+    {
+        defaultFireRate = fireRate;
+        this.weaponType = weaponType;
+    }
+
     #region Burst methods
 
     public bool BurstActivated()
