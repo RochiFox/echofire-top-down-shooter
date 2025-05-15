@@ -1733,6 +1733,7 @@ GameObject:
   - component: {fileID: 461672719}
   - component: {fileID: 461672721}
   - component: {fileID: 461672720}
+  - component: {fileID: 461672722}
   m_Layer: 0
   m_Name: Pickup Auto-Rifle
   m_TagString: Untagged
@@ -1790,27 +1791,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125589149c694814dbbbe1e9fcec867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon:
-    weaponType: 2
-    shootType: 0
-    bulletsPerShot: 0
-    defaultFireRate: 0
-    fireRate: 1
-    burstAvailable: 0
-    burstActive: 0
-    burstBulletsPerShot: 0
-    burstFireRate: 0
-    burstFireDelay: 0.1
-    bulletsInMagazine: 40
-    magazineCapacity: 40
-    totalReserveAmmo: 40
-    reloadSpeed: 1
-    equipmentSpeed: 1
-    gunDistance: 4
-    cameraDistance: 0
-    baseSpread: 0
-    maxSpread: 3
-    spreadIncreaseRate: 0.15
+  weaponData: {fileID: 11400000, guid: 2d92cffb2be1b204eb5b288c09117be6, type: 2}
+--- !u!54 &461672722
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461672718}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &461898882
 GameObject:
   m_ObjectHideFlags: 0
@@ -8758,24 +8766,10 @@ MonoBehaviour:
   currentWeapon:
     weaponType: 0
     shootType: 0
-    bulletsPerShot: 0
-    defaultFireRate: 0
-    fireRate: 1
-    burstAvailable: 0
     burstActive: 0
-    burstBulletsPerShot: 0
-    burstFireRate: 0
-    burstFireDelay: 0.1
     bulletsInMagazine: 0
     magazineCapacity: 0
     totalReserveAmmo: 0
-    reloadSpeed: 1
-    equipmentSpeed: 1
-    gunDistance: 4
-    cameraDistance: 3
-    baseSpread: 0
-    maxSpread: 3
-    spreadIncreaseRate: 0.15
   bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
   bulletSpeed: 15
   weaponHolder: {fileID: 1354336790}
@@ -8783,64 +8777,22 @@ MonoBehaviour:
   weaponSlots:
   - weaponType: 2
     shootType: 1
-    bulletsPerShot: 1
-    defaultFireRate: 10
-    fireRate: 10
-    burstAvailable: 1
     burstActive: 0
-    burstBulletsPerShot: 3
-    burstFireRate: 1.5
-    burstFireDelay: 0.1
     bulletsInMagazine: 30
     magazineCapacity: 30
     totalReserveAmmo: 90
-    reloadSpeed: 1
-    equipmentSpeed: 1
-    gunDistance: 6
-    cameraDistance: 7
-    baseSpread: 0
-    maxSpread: 2
-    spreadIncreaseRate: 0.15
   - weaponType: 3
     shootType: 0
-    bulletsPerShot: 4
-    defaultFireRate: 1
-    fireRate: 1
-    burstAvailable: 0
     burstActive: 0
-    burstBulletsPerShot: 0
-    burstFireRate: 0
-    burstFireDelay: 0.1
     bulletsInMagazine: 16
     magazineCapacity: 16
     totalReserveAmmo: 48
-    reloadSpeed: 1
-    equipmentSpeed: 1
-    gunDistance: 3.5
-    cameraDistance: 5
-    baseSpread: 10
-    maxSpread: 10
-    spreadIncreaseRate: 0.15
   - weaponType: 1
     shootType: 0
-    bulletsPerShot: 1
-    defaultFireRate: 1
-    fireRate: 1
-    burstAvailable: 0
     burstActive: 0
-    burstBulletsPerShot: 0
-    burstFireRate: 0
-    burstFireDelay: 0.1
     bulletsInMagazine: 6
     magazineCapacity: 6
     totalReserveAmmo: 48
-    reloadSpeed: 1
-    equipmentSpeed: 1
-    gunDistance: 3.5
-    cameraDistance: 5
-    baseSpread: 10
-    maxSpread: 10
-    spreadIncreaseRate: 0.15
 --- !u!114 &1746550278
 MonoBehaviour:
   m_ObjectHideFlags: 0

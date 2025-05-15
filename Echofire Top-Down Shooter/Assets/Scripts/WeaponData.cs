@@ -3,8 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon Data", menuName = "Weapon System/Weapon Data")]
 public class WeaponData : ScriptableObject
 {
-    [Header("Regular shot")] public string weaponName;
-    public ShootType shootType;
+    [Header("Ammo details")] public int bulletsInMagazine;
+    public int magazineCapacity;
+    public int totalReserveAmmo;
+
+    [Header("Regular shot")] public ShootType shootType;
     public int bulletsPerShot = 1;
     public float fireRate;
 

@@ -18,6 +18,8 @@ public enum ShootType
 [System.Serializable]
 public class Weapon
 {
+    public WeaponType weaponType;
+
     #region Regular mode variables
 
     public ShootType shootType;
@@ -44,9 +46,8 @@ public class Weapon
     public int magazineCapacity;
     public int totalReserveAmmo;
 
-    #region Weapon generic info
+    #region Weapon generic info variables
 
-    public WeaponType weaponType;
     public float ReloadSpeed { get; private set; }
     public float EquipmentSpeed { get; private set; }
     public float GunDistance { get; private set; }
@@ -69,6 +70,10 @@ public class Weapon
 
     public Weapon(WeaponData weaponData)
     {
+        bulletsInMagazine = weaponData.bulletsInMagazine;
+        magazineCapacity = weaponData.magazineCapacity;
+        totalReserveAmmo = weaponData.totalReserveAmmo;
+
         fireRate = weaponData.fireRate;
         weaponType = weaponData.weaponType;
 

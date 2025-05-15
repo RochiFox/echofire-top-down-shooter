@@ -62,7 +62,7 @@ public class PlayerWeaponController : MonoBehaviour
         CameraManager.instance.ChangeCameraDistance(currentWeapon.CameraDistance);
     }
 
-    public void PickupWeapon(Weapon newWeapon)
+    public void PickupWeapon(WeaponData newWeaponData)
     {
         if (weaponSlots.Count >= maxSlots)
         {
@@ -70,7 +70,7 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        weaponSlots.Add(newWeapon);
+        weaponSlots.Add(new Weapon(newWeaponData));
 
         player.WeaponVisuals.SwitchOnBackupWeaponModel();
     }
