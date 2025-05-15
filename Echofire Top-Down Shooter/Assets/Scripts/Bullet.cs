@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
     private void ReturnToPoolIfNeeded()
     {
         if (trailRenderer.time < 0)
-            ObjectPool.instance.ReturnBullet(gameObject);
+            ReturnBulletToPool();
     }
 
     private void DisableBulletIfNeeded()
@@ -55,14 +55,16 @@ public class Bullet : MonoBehaviour
     private void FadeTrailIfNeeded()
     {
         if (Vector3.Distance(startPosition, transform.position) > flyDistance - 1.5f)
-            trailRenderer.time -= 2 * Time.deltaTime;
+            trailRenderer.time -= 2 * Time.deltaTime; // magic number 2 is choosing for testing
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         CreateImpactFx(collision);
-        ObjectPool.instance.ReturnBullet(gameObject);
+        ReturnBulletToPool();
     }
+
+    private void ReturnBulletToPool() => ObjectPool.instance.ReturnObject(gameObject);
 
     private void CreateImpactFx(Collision collision)
     {
@@ -70,9 +72,9 @@ public class Bullet : MonoBehaviour
 
         ContactPoint contact = collision.contacts[0];
 
-        GameObject newImpactFx =
-            Instantiate(bulletImpactFX, contact.point, Quaternion.LookRotation(contact.normal));
+        GameObject newImpactFx = ObjectPool.instance.GetObject((bulletImpactFX));
+        newImpactFx.transform.position = contact.point;
 
-        Destroy(newImpactFx, 1f);
+        ObjectPool.instance.ReturnObject(newImpactFx, 1);
     }
 }
