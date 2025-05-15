@@ -18,42 +18,79 @@ public enum ShootType
 [System.Serializable]
 public class Weapon
 {
-    public WeaponType weaponType;
+    #region Regular mode variables
 
-    [Header("Shooting specifics")] public ShootType shootType;
-    public int bulletsPerShot;
-    public float defaultFireRate;
-    public float fireRate = 1; // bullets per second
+    public ShootType shootType;
+    public int BulletsPerShot { get; private set; }
+
+    private float defaultFireRate;
+    private float fireRate; // bullets per second
     private float lastShootTime;
 
-    [Header("Burst fire")] public bool burstAvailable;
+    #endregion
+
+    #region Burst mode variables
+
+    private bool burstAvailable;
     public bool burstActive;
 
-    public int burstBulletsPerShot;
-    public float burstFireRate;
-    public float burstFireDelay = 0.1f;
+    private int burstBulletsPerShot;
+    private float burstFireRate;
+    public float BurstFireDelay { get; private set; }
+
+    #endregion
 
     [Header("Ammo details")] public int bulletsInMagazine;
     public int magazineCapacity;
     public int totalReserveAmmo;
 
-    [Range(1, 2)] public float reloadSpeed = 1;
-    [Range(1, 2)] public float equipmentSpeed = 1;
-    [Range(2, 12)] public float gunDistance = 4;
-    [Range(3, 8)] public float cameraDistance;
+    #region Weapon generic info
 
-    [Header("Spread")] public float baseSpread = 1;
+    public WeaponType weaponType;
+    public float ReloadSpeed { get; private set; }
+    public float EquipmentSpeed { get; private set; }
+    public float GunDistance { get; private set; }
+    public float CameraDistance { get; private set; }
+
+    #endregion
+
+    #region Weapon spread variables
+
+    [Header("Spread")] private float baseSpread;
     private float currentSpread;
-    public float maxSpread = 3;
-    public float spreadIncreaseRate = 0.15f;
+    private float maxSpread;
+
+    private float spreadIncreaseRate;
 
     private float lastSpreadUpdateTime;
     private const float SpreadCooldown = 1;
 
-    public Weapon(WeaponType weaponType)
+    #endregion
+
+    public Weapon(WeaponData weaponData)
     {
+        fireRate = weaponData.fireRate;
+        weaponType = weaponData.weaponType;
+
+        BulletsPerShot = weaponData.bulletsPerShot;
+        shootType = weaponData.shootType;
+
+        burstAvailable = weaponData.burstAvailable;
+        burstActive = weaponData.burstActive;
+        burstBulletsPerShot = weaponData.burstBulletsPerShot;
+        burstFireRate = weaponData.burstFireRate;
+        BurstFireDelay = weaponData.burstFireDelay;
+
+        baseSpread = weaponData.baseSpread;
+        maxSpread = weaponData.maxSpread;
+        spreadIncreaseRate = weaponData.spreadIncreaseRate;
+
+        ReloadSpeed = weaponData.reloadSpeed;
+        EquipmentSpeed = weaponData.equipmentSpeed;
+        GunDistance = weaponData.gunDistance;
+        CameraDistance = weaponData.cameraDistance;
+
         defaultFireRate = fireRate;
-        this.weaponType = weaponType;
     }
 
     #region Burst methods
@@ -62,7 +99,7 @@ public class Weapon
     {
         if (weaponType != WeaponType.Shotgun) return burstActive;
 
-        burstFireDelay = 0;
+        BurstFireDelay = 0;
         return true;
     }
 
@@ -75,12 +112,12 @@ public class Weapon
 
         if (burstActive)
         {
-            bulletsPerShot = burstBulletsPerShot;
+            BulletsPerShot = burstBulletsPerShot;
             fireRate = burstFireRate;
         }
         else
         {
-            bulletsPerShot = 1;
+            BulletsPerShot = 1;
             fireRate = defaultFireRate;
         }
     }

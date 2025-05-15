@@ -1696,7 +1696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f7cb90f95153e489c3f81bac363a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 709851603379088992, guid: 5d6f9576cecc23b428a0b635b90998be, type: 3}
   poolSize: 50
 --- !u!4 &429299455
 Transform:
@@ -8755,6 +8754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a221e91cdd91c14c8461a90ec881d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultWeaponData: {fileID: 11400000, guid: e9d3657b873d68749b8a304fef496ede, type: 2}
   currentWeapon:
     weaponType: 0
     shootType: 0
