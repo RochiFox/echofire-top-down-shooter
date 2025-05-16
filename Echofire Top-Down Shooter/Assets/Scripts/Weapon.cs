@@ -55,6 +55,8 @@ public class Weapon
 
     #endregion
 
+    public WeaponData WeaponData { get; private set; }
+
     #region Weapon spread variables
 
     [Header("Spread")] private float baseSpread;
@@ -96,6 +98,7 @@ public class Weapon
         CameraDistance = weaponData.cameraDistance;
 
         defaultFireRate = fireRate;
+        this.WeaponData = weaponData;
     }
 
     #region Burst methods

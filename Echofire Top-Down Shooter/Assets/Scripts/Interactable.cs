@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    protected MeshRenderer mesh;
-    protected Material defaultMaterial;
+    private MeshRenderer mesh;
+    private Material defaultMaterial;
     [SerializeField] private Material highlightMaterial;
 
     private void Start()
@@ -38,7 +38,7 @@ public class Interactable : MonoBehaviour
 
         if (!playerInteraction) return;
 
-        playerInteraction.interactableList.Add(this);
+        playerInteraction.GetInteractableList().Add(this);
         playerInteraction.UpdateClosestInteractable();
     }
 
@@ -50,7 +50,7 @@ public class Interactable : MonoBehaviour
 
         HighlightActive(false);
 
-        playerInteraction.interactableList.Remove(this);
+        playerInteraction.GetInteractableList().Remove(this);
         playerInteraction.UpdateClosestInteractable();
     }
 }

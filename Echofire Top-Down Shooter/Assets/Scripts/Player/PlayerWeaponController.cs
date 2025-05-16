@@ -23,6 +23,8 @@ public class PlayerWeaponController : MonoBehaviour
     [Header("Inventory")] [SerializeField] private int maxSlots = 2;
     [SerializeField] private List<Weapon> weaponSlots;
 
+    [SerializeField] private GameObject weaponPickupPrefab;
+
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -62,10 +64,8 @@ public class PlayerWeaponController : MonoBehaviour
         CameraManager.instance.ChangeCameraDistance(currentWeapon.CameraDistance);
     }
 
-    public void PickupWeapon(WeaponData newWeaponData)
+    public void PickupWeapon(Weapon newWeapon)
     {
-        Weapon newWeapon = new Weapon(newWeaponData);
-
         if (WeaponInSlots(newWeapon.weaponType) != null)
         {
             WeaponInSlots(newWeapon.weaponType).totalReserveAmmo += newWeapon.bulletsInMagazine;
@@ -79,6 +79,8 @@ public class PlayerWeaponController : MonoBehaviour
             player.WeaponVisuals.SwitchOffWeaponModels();
 
             weaponSlots[weaponIndex] = newWeapon;
+
+            CreateWeaponOnTheGround();
             EquipWeapon(weaponIndex);
 
             return;
@@ -93,8 +95,16 @@ public class PlayerWeaponController : MonoBehaviour
         if (HasOnlyOneWeapon())
             return;
 
+        CreateWeaponOnTheGround();
+
         weaponSlots.Remove(currentWeapon);
         EquipWeapon(0);
+    }
+
+    private void CreateWeaponOnTheGround()
+    {
+        GameObject droppedWeapon = ObjectPool.instance.GetObject(weaponPickupPrefab);
+        droppedWeapon.GetComponent<PickupWeapon>()?.SetupPickupWeapon(currentWeapon, transform);
     }
 
     public void SetWeaponReady(bool ready) => weaponReady = ready;

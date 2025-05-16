@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     private Player player;
-    public List<Interactable> interactableList;
+    public List<Interactable> interactableList = new List<Interactable>();
 
     private Interactable closestInteractable;
 
@@ -24,6 +23,9 @@ public class PlayerInteraction : MonoBehaviour
         if (!closestInteractable) return;
 
         closestInteractable.Interaction();
+        interactableList.Remove(closestInteractable);
+
+        UpdateClosestInteractable();
     }
 
     public void UpdateClosestInteractable()
@@ -46,4 +48,6 @@ public class PlayerInteraction : MonoBehaviour
 
         if (closestInteractable) closestInteractable.HighlightActive(true);
     }
+
+    public List<Interactable> GetInteractableList() => interactableList;
 }
