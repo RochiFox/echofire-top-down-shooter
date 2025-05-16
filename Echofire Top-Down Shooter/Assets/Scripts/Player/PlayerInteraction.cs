@@ -1,11 +1,28 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    private Player player;
     public List<Interactable> interactableList;
 
     private Interactable closestInteractable;
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        player.Controls.Character.Interaction.performed += _ => InteractWithClosest();
+    }
+
+    private void InteractWithClosest()
+    {
+        closestInteractable.Interaction();
+    }
 
     public void UpdateClosestInteractable()
     {
