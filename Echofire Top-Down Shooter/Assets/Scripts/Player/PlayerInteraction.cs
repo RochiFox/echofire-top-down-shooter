@@ -21,6 +21,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InteractWithClosest()
     {
+        if (!closestInteractable) return;
+
         closestInteractable.Interaction();
     }
 

@@ -137,7 +137,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
         AttachLeftHand();
     }
 
-    private void SwitchOffWeaponModels()
+    public void SwitchOffWeaponModels()
     {
         foreach (WeaponModel model in weaponModels)
         {

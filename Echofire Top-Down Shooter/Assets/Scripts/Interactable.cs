@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    private MeshRenderer mesh;
+    protected MeshRenderer mesh;
+    protected Material defaultMaterial;
     [SerializeField] private Material highlightMaterial;
-    private Material defaultMaterial;
 
     private void Start()
     {
@@ -13,7 +13,13 @@ public class Interactable : MonoBehaviour
             mesh = GetComponentInChildren<MeshRenderer>();
         }
 
-        defaultMaterial = mesh.material;
+        defaultMaterial = mesh.sharedMaterial;
+    }
+
+    protected void UpdateMeshAndMaterial(MeshRenderer newMesh)
+    {
+        mesh = newMesh;
+        defaultMaterial = newMesh.sharedMaterial;
     }
 
     public virtual void Interaction()
