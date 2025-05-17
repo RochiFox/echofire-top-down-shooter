@@ -1,30 +1,22 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Idle info")] public float idleTime;
+
     public EnemyStateMachine StateMachine { get; private set; }
 
-    public EnemyState IdleState { get; private set; }
-    public EnemyState MoveState { get; private set; }
-
-    private void Start()
+    protected virtual void Awake()
     {
         StateMachine = new EnemyStateMachine();
-
-        IdleState = new EnemyState(this, StateMachine, "Idle");
-        MoveState = new EnemyState(this, StateMachine, "Move");
-
-        StateMachine.Initialize(IdleState);
     }
 
-    private void Update()
+    protected virtual void Start()
     {
-        StateMachine.CurrentState.Update();
+    }
 
-        if (Input.GetKeyDown(KeyCode.V))
-            StateMachine.ChangeState(IdleState);
-
-        if (Input.GetKeyDown(KeyCode.C))
-            StateMachine.ChangeState(MoveState);
+    protected virtual void Update()
+    {
     }
 }
