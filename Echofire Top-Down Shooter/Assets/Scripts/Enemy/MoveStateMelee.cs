@@ -16,13 +16,12 @@ public class MoveStateMelee : EnemyState
         base.Enter();
 
         destination = enemy.GetPatrolDestination();
+        enemy.Agent.SetDestination(destination);
     }
 
     public override void Update()
     {
         base.Update();
-
-        enemy.Agent.SetDestination(destination);
 
         if (enemy.Agent.remainingDistance <= 1)
             StateMachine.ChangeState(enemy.IdleState);

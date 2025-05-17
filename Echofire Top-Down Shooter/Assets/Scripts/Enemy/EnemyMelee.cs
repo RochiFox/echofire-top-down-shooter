@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemyMelee : Enemy
 {
     public IdleStateMelee IdleState { get; private set; }
