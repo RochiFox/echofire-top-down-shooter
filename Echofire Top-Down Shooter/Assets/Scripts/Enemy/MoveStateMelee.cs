@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveStateMelee : EnemyState
 {
@@ -23,7 +24,9 @@ public class MoveStateMelee : EnemyState
     {
         base.Update();
 
-        if (enemy.Agent.remainingDistance <= 1)
+        enemy.transform.rotation = enemy.FaceTarget(enemy.Agent.steeringTarget);
+
+        if (enemy.Agent.remainingDistance <= enemy.Agent.stoppingDistance + 0.05f)
             StateMachine.ChangeState(enemy.IdleState);
     }
 
