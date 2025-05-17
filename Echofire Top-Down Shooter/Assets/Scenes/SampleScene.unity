@@ -13476,7 +13476,8 @@ MonoBehaviour:
   turnSpeed: 5
   aggressionRange: 4
   idleTime: 2
-  moveSpeed: 0
+  moveSpeed: 1.5
+  chaseSpeed: 3.5
   patrolPoints:
   - {fileID: 588063881}
   - {fileID: 68565116}
