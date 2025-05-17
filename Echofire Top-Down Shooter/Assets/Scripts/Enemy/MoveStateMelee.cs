@@ -24,6 +24,12 @@ public class MoveStateMelee : EnemyState
     {
         base.Update();
 
+        if (enemy.PlayerInAggressionRange())
+        {
+            StateMachine.ChangeState(enemy.RecoveryState);
+            return;
+        }
+
         enemy.transform.rotation = enemy.FaceTarget(enemy.Agent.steeringTarget);
 
         if (enemy.Agent.remainingDistance <= enemy.Agent.stoppingDistance + 0.05f)

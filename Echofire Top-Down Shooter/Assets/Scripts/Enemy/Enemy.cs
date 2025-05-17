@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public float turnSpeed;
+    public float aggressionRange;
 
     [Header("Idle data")] public float idleTime;
 
@@ -12,10 +13,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints;
     private int currentPatrolIndex;
 
+    [SerializeField] private Transform playerTransform;
+    public Transform Player => playerTransform;
+
     public Animator Anim { get; private set; }
-
     public NavMeshAgent Agent { get; private set; }
-
     public EnemyStateMachine StateMachine { get; private set; }
 
     protected virtual void Awake()
@@ -34,6 +36,15 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, aggressionRange);
+    }
+
+    public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
+
+    public bool PlayerInAggressionRange() => Vector3.Distance(transform.position, Player.position) < aggressionRange;
 
     public Vector3 GetPatrolDestination()
     {
