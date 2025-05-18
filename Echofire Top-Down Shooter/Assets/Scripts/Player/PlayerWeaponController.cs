@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerWeaponController : MonoBehaviour
 {
     private Player player;
-    private const float ReferenceBulletSpeed = 20;
+    private const float REFERENCE_BULLET_SPEED = 20;
 
     [SerializeField] private WeaponData defaultWeaponData;
     [SerializeField] private Weapon currentWeapon;
@@ -164,7 +164,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         Vector3 bulletsDirection = currentWeapon.ApplySpread(BulletDirection());
 
-        rbNewBullet.mass = ReferenceBulletSpeed / bulletSpeed;
+        rbNewBullet.mass = REFERENCE_BULLET_SPEED / bulletSpeed;
         rbNewBullet.velocity = bulletsDirection * bulletSpeed;
     }
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimationEvents : MonoBehaviour
@@ -13,4 +10,7 @@ public class EnemyAnimationEvents : MonoBehaviour
     }
 
     public void AnimationTrigger() => enemy.AnimationTrigger();
+
+    public void StartManualMovement() => enemy.ActivateManualMovement(true);
+    public void StopManualMovement() => enemy.ActivateManualMovement(false);
 }

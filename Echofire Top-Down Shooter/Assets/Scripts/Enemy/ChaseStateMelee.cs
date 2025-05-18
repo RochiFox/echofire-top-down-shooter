@@ -16,6 +16,8 @@ public class ChaseStateMelee : EnemyState
     {
         base.Enter();
 
+        enemy.PullWeapon();
+
         enemy.Agent.speed = enemy.chaseSpeed;
         enemy.Agent.isStopped = false;
     }
@@ -23,6 +25,9 @@ public class ChaseStateMelee : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (enemy.PlayerInAttackRange())
+            StateMachine.ChangeState(enemy.AttackState);
 
         enemy.transform.rotation = enemy.FaceTarget(enemy.Agent.steeringTarget);
 
