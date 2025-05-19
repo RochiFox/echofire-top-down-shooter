@@ -61,7 +61,10 @@ public class EnemyMelee : Enemy
 
     public override void GetHit()
     {
-        StateMachine.ChangeState(DeadState);
+        base.GetHit();
+
+        if (healthPoints <= 0)
+            StateMachine.ChangeState(DeadState);
     }
 
     public void PullWeapon()
