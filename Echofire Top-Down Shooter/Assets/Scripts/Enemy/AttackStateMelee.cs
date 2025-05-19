@@ -6,6 +6,7 @@ public class AttackStateMelee : EnemyState
     private static readonly int AttackAnimationSpeed = Animator.StringToHash("AttackAnimationSpeed");
     private static readonly int AttackIndex = Animator.StringToHash("AttackIndex");
     private static readonly int RecoveryIndex = Animator.StringToHash("RecoveryIndex");
+    private static readonly int SlashAttackIndex = Animator.StringToHash("SlashAttackIndex");
 
     private EnemyMelee enemy;
     private Vector3 attackDirection;
@@ -27,6 +28,7 @@ public class AttackStateMelee : EnemyState
         attackMoveSpeed = enemy.attackData.moveSpeed;
         enemy.Anim.SetFloat(AttackAnimationSpeed, enemy.attackData.animationSpeed);
         enemy.Anim.SetFloat(AttackIndex, enemy.attackData.attackIndex);
+        enemy.Anim.SetFloat(SlashAttackIndex, Random.Range(0, 5));
 
         enemy.Agent.isStopped = true;
         enemy.Agent.velocity = Vector3.zero;

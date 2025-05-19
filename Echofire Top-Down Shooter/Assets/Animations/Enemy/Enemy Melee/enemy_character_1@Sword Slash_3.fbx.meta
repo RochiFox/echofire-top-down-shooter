@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: be494146172eaad458d5e035f402cb0c
+guid: 6dca96351f267a54cba5b68928eb786f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sword Slash
+      name: Sword Slash_3
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 58
+      lastFrame: 62
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
