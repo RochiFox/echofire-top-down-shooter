@@ -25,6 +25,7 @@ public class EnemyMelee : Enemy
     public RecoveryStateMelee RecoveryState { get; private set; }
     public ChaseStateMelee ChaseState { get; private set; }
     public AttackStateMelee AttackState { get; private set; }
+    public DeadStateMelee DeadState { get; private set; }
 
     [Header("Attack Data")] public AttackData attackData;
     public List<AttackData> attackList;
@@ -41,6 +42,7 @@ public class EnemyMelee : Enemy
         RecoveryState = new RecoveryStateMelee(this, StateMachine, "Recovery");
         ChaseState = new ChaseStateMelee(this, StateMachine, "Chase");
         AttackState = new AttackStateMelee(this, StateMachine, "Attack");
+        DeadState = new DeadStateMelee(this, StateMachine, "Idle"); // Idle anim is just a placeholder (we use ragdoll)
     }
 
     protected override void Start()
@@ -55,6 +57,11 @@ public class EnemyMelee : Enemy
         base.Update();
 
         StateMachine.CurrentState.Update();
+    }
+
+    public override void GetHit()
+    {
+        StateMachine.ChangeState(DeadState);
     }
 
     public void PullWeapon()
