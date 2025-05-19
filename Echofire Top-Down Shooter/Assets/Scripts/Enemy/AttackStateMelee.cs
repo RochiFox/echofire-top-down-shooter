@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackStateMelee : EnemyState
@@ -21,6 +22,7 @@ public class AttackStateMelee : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.PullWeapon();
 
         attackMoveSpeed = enemy.attackData.moveSpeed;
         enemy.Anim.SetFloat(AttackAnimationSpeed, enemy.attackData.animationSpeed);
@@ -62,9 +64,28 @@ public class AttackStateMelee : EnemyState
     {
         base.Exit();
 
-        enemy.Anim.SetFloat(RecoveryIndex, 0);
+        SetupNextAttack();
+    }
 
-        if (enemy.PlayerInAttackRange())
-            enemy.Anim.SetFloat(RecoveryIndex, 1);
+    private void SetupNextAttack()
+    {
+        int recoveryIndex = PlayerClose() ? 1 : 0;
+        enemy.Anim.SetFloat(RecoveryIndex, recoveryIndex);
+
+        enemy.attackData = UpdatedAttackData();
+    }
+
+    private bool PlayerClose() => Vector3.Distance(enemy.transform.position, enemy.Player.position) <= 1;
+
+    private AttackData UpdatedAttackData()
+    {
+        List<AttackData> validAttacks = new List<AttackData>(enemy.attackList);
+
+        if (PlayerClose())
+            validAttacks.RemoveAll(parameter => parameter.attackType == AttackTypeMelee.Charge);
+
+        int random = Random.Range(0, validAttacks.Count);
+
+        return validAttacks[random];
     }
 }

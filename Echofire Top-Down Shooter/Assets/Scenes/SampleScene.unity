@@ -13567,10 +13567,25 @@ MonoBehaviour:
   - {fileID: 207845084}
   playerTransform: {fileID: 1746550274}
   attackData:
+    attackName: 
     attackRange: 1.5
     moveSpeed: 0
     attackIndex: 1
     animationSpeed: 1.4
+    attackType: 0
+  attackList:
+  - attackName: Sword spin attack
+    attackRange: 1.5
+    moveSpeed: 2.5
+    attackIndex: 0
+    animationSpeed: 1
+    attackType: 1
+  - attackName: Sword slash
+    attackRange: 1
+    moveSpeed: 0
+    attackIndex: 1
+    animationSpeed: 1.4
+    attackType: 0
   hiddenWeapon: {fileID: 680620999}
   pulledWeapon: {fileID: 8564609179040330628}
 --- !u!4 &2051637044
