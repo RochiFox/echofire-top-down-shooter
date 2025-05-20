@@ -1,7 +1,7 @@
 public class DeadStateMelee : EnemyState
 {
-    private EnemyMelee enemy;
-    private EnemyRagdoll ragdoll;
+    private readonly EnemyMelee enemy;
+    private readonly EnemyRagdoll ragdoll;
 
     private bool interactionDisabled;
 
@@ -31,14 +31,14 @@ public class DeadStateMelee : EnemyState
         base.Update();
 
         // TODO: check later if interaction will degrade performance of the game
+        DisableInteractionIfShould();
+    }
+
+    private void DisableInteractionIfShould()
+    {
         if (!(StateTimer < 0) || interactionDisabled) return;
         interactionDisabled = true;
         ragdoll.RagdollActive(false);
         ragdoll.CollidersActive(false);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }

@@ -1,8 +1,6 @@
-using UnityEngine;
-
 public class RecoveryStateMelee : EnemyState
 {
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
 
     public RecoveryStateMelee(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName) : base(enemyBase,
         stateMachine, animBoolName)
@@ -21,7 +19,7 @@ public class RecoveryStateMelee : EnemyState
     {
         base.Update();
 
-        enemy.transform.rotation = enemy.FaceTarget(enemy.Player.position);
+        enemy.FaceTarget(enemy.Player.position);
 
         if (TriggerCalled)
         {
@@ -32,10 +30,5 @@ public class RecoveryStateMelee : EnemyState
             else
                 StateMachine.ChangeState(enemy.ChaseState);
         }
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }

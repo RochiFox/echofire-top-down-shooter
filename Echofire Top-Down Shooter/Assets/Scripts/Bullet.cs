@@ -84,7 +84,7 @@ public class Bullet : MonoBehaviour
         Rigidbody hitRigidbody = collision.collider.attachedRigidbody;
 
         enemy.GetHit();
-        enemy.HitImpact(force, collision.contacts[0].point, hitRigidbody);
+        enemy.DeathImpact(force, collision.contacts[0].point, hitRigidbody);
     }
 
     private void ReturnBulletToPool() => ObjectPool.instance.ReturnObject(gameObject);

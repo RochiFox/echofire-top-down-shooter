@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MoveStateMelee : EnemyState
 {
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
     private Vector3 destination;
 
     public MoveStateMelee(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName) : base(enemyBase,
@@ -26,22 +25,9 @@ public class MoveStateMelee : EnemyState
     {
         base.Update();
 
-        if (enemy.PlayerInAggressionRange())
-        {
-            StateMachine.ChangeState(enemy.RecoveryState);
-            return;
-        }
-
-        enemy.transform.rotation = enemy.FaceTarget(enemy.Agent.steeringTarget);
+        enemy.FaceTarget(enemy.Agent.steeringTarget);
 
         if (enemy.Agent.remainingDistance <= enemy.Agent.stoppingDistance + 0.05f)
             StateMachine.ChangeState(enemy.IdleState);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        Debug.Log("Exit move state");
     }
 }

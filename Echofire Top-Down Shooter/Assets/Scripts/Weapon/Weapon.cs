@@ -66,7 +66,7 @@ public class Weapon
     private float spreadIncreaseRate;
 
     private float lastSpreadUpdateTime;
-    private const float SpreadCooldown = 1;
+    private const float SPREAD_COOLDOWN = 1;
 
     #endregion
 
@@ -157,7 +157,7 @@ public class Weapon
 
     private void UpdateSpread()
     {
-        if (Time.time > lastSpreadUpdateTime + SpreadCooldown)
+        if (Time.time > lastSpreadUpdateTime + SPREAD_COOLDOWN)
             currentSpread = baseSpread;
         else
             IncreaseSpread();

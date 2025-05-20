@@ -1,6 +1,6 @@
 public class IdleStateMelee : EnemyState
 {
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
 
     public IdleStateMelee(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName) : base(enemyBase,
         stateMachine, animBoolName)
@@ -19,18 +19,7 @@ public class IdleStateMelee : EnemyState
     {
         base.Update();
 
-        if (enemy.PlayerInAggressionRange())
-        {
-            StateMachine.ChangeState(enemy.RecoveryState);
-            return;
-        }
-
         if (StateTimer < 0)
             StateMachine.ChangeState(enemy.MoveState);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }

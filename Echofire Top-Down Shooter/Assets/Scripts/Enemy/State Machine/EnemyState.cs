@@ -2,24 +2,24 @@ using UnityEngine;
 
 public class EnemyState
 {
-    protected Enemy EnemyBase;
-    protected EnemyStateMachine StateMachine;
+    protected readonly Enemy EnemyBase;
+    protected readonly EnemyStateMachine StateMachine;
 
-    protected string AnimBoolName;
+    private readonly string animBoolName;
     protected float StateTimer;
 
     protected bool TriggerCalled;
 
-    public EnemyState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName)
+    protected EnemyState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName)
     {
         this.EnemyBase = enemyBase;
         this.StateMachine = stateMachine;
-        this.AnimBoolName = animBoolName;
+        this.animBoolName = animBoolName;
     }
 
     public virtual void Enter()
     {
-        EnemyBase.Anim.SetBool(AnimBoolName, true);
+        EnemyBase.Anim.SetBool(animBoolName, true);
 
         TriggerCalled = false;
     }
@@ -31,7 +31,7 @@ public class EnemyState
 
     public virtual void Exit()
     {
-        EnemyBase.Anim.SetBool(AnimBoolName, false);
+        EnemyBase.Anim.SetBool(animBoolName, false);
     }
 
     public virtual void AbilityTrigger()

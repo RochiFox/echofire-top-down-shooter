@@ -4,7 +4,7 @@ public class AbilityStateMelee : EnemyState
 {
     private static readonly int RecoveryIndex = Animator.StringToHash("RecoveryIndex");
 
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
     private Vector3 movementDirection;
 
     private const float MAX_MOVEMENT_DISTANCE = 20;
@@ -34,7 +34,7 @@ public class AbilityStateMelee : EnemyState
 
         if (enemy.ManualRotationActive())
         {
-            enemy.transform.rotation = enemy.FaceTarget(enemy.Player.position);
+            enemy.FaceTarget(enemy.Player.position);
             movementDirection = enemy.transform.position + (enemy.transform.forward * MAX_MOVEMENT_DISTANCE);
         }
 

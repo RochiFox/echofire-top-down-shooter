@@ -8,7 +8,7 @@ public class AttackStateMelee : EnemyState
     private static readonly int RecoveryIndex = Animator.StringToHash("RecoveryIndex");
     private static readonly int SlashAttackIndex = Animator.StringToHash("SlashAttackIndex");
 
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
     private Vector3 attackDirection;
     private float attackMoveSpeed;
 
@@ -42,7 +42,7 @@ public class AttackStateMelee : EnemyState
 
         if (enemy.ManualRotationActive())
         {
-            enemy.transform.rotation = enemy.FaceTarget(enemy.Player.position);
+            enemy.FaceTarget(enemy.Player.position);
             attackDirection = enemy.transform.position + (enemy.transform.forward * MAX_ATTACK_DISTANCE);
         }
 

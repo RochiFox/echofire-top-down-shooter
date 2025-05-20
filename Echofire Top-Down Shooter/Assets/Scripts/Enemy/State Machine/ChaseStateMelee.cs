@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChaseStateMelee : EnemyState
 {
-    private EnemyMelee enemy;
+    private readonly EnemyMelee enemy;
 
     private float lastTimeUpdatedDestination;
 
@@ -27,15 +27,10 @@ public class ChaseStateMelee : EnemyState
         if (enemy.PlayerInAttackRange())
             StateMachine.ChangeState(enemy.AttackState);
 
-        enemy.transform.rotation = enemy.FaceTarget(enemy.Agent.steeringTarget);
+        enemy.FaceTarget(enemy.Agent.steeringTarget);
 
         if (CanUpdateDestination())
             enemy.Agent.destination = enemy.Player.transform.position;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     private bool CanUpdateDestination()
