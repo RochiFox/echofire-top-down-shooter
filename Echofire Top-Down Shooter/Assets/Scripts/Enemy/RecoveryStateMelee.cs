@@ -21,12 +21,15 @@ public class RecoveryStateMelee : EnemyState
 
         enemy.transform.rotation = enemy.FaceTarget(enemy.Player.position);
 
-        if (!TriggerCalled) return;
+        if (TriggerCalled)
+        {
+            StateMachine.ChangeState(enemy.AbilityState);
 
-        if (enemy.PlayerInAttackRange())
-            StateMachine.ChangeState(enemy.AttackState);
-        else
-            StateMachine.ChangeState(enemy.ChaseState);
+            // if (enemy.PlayerInAttackRange())
+            //     StateMachine.ChangeState(enemy.AttackState);
+            // else
+            //     StateMachine.ChangeState(enemy.ChaseState);
+        }
     }
 
     public override void Exit()
