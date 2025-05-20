@@ -21,12 +21,14 @@ public enum AttackTypeMelee
 public enum EnemyMeleeType
 {
     Regular,
-    Shield
+    Shield,
+    Dodge
 }
 
 public class EnemyMelee : Enemy
 {
     private static readonly int ChaseIndex = Animator.StringToHash("ChaseIndex");
+    private static readonly int Dodge = Animator.StringToHash("Dodge");
 
     public IdleStateMelee IdleState { get; private set; }
     public MoveStateMelee MoveState { get; private set; }
@@ -37,6 +39,8 @@ public class EnemyMelee : Enemy
 
     [Header("Enemy Settings")] public EnemyMeleeType meleeType;
     public Transform shieldTransform;
+    public float dodgeCooldown;
+    private float lastTimeDodge;
 
     [Header("Attack Data")] public AttackData attackData;
     public List<AttackData> attackList;
@@ -92,6 +96,24 @@ public class EnemyMelee : Enemy
     {
         hiddenWeapon.gameObject.SetActive(false);
         pulledWeapon.gameObject.SetActive(true);
+    }
+
+    public void ActivateDodgeRoll()
+    {
+        if (meleeType != EnemyMeleeType.Dodge)
+            return;
+
+        if (StateMachine.CurrentState != ChaseState)
+            return;
+
+        if (Vector3.Distance(transform.position, Player.position) < 1.8f)
+            return;
+
+        if (Time.time > dodgeCooldown + lastTimeDodge)
+        {
+            lastTimeDodge = Time.time;
+            Anim.SetTrigger(Dodge);
+        }
     }
 
     protected override void OnDrawGizmos()

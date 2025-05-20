@@ -13569,8 +13569,9 @@ MonoBehaviour:
   - {fileID: 68565116}
   - {fileID: 207845084}
   playerTransform: {fileID: 1746550274}
-  meleeType: 1
+  meleeType: 2
   shieldTransform: {fileID: 5109715247530957569}
+  dodgeCooldown: 5
   attackData:
     attackName: 
     attackRange: 1.5
