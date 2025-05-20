@@ -18,14 +18,25 @@ public enum AttackTypeMelee
     Charge
 }
 
+public enum EnemyMeleeType
+{
+    Regular,
+    Shield
+}
+
 public class EnemyMelee : Enemy
 {
+    private static readonly int ChaseIndex = Animator.StringToHash("ChaseIndex");
+
     public IdleStateMelee IdleState { get; private set; }
     public MoveStateMelee MoveState { get; private set; }
     public RecoveryStateMelee RecoveryState { get; private set; }
     public ChaseStateMelee ChaseState { get; private set; }
     public AttackStateMelee AttackState { get; private set; }
     public DeadStateMelee DeadState { get; private set; }
+
+    [Header("Enemy Settings")] public EnemyMeleeType meleeType;
+    public Transform shieldTransform;
 
     [Header("Attack Data")] public AttackData attackData;
     public List<AttackData> attackList;
@@ -50,6 +61,8 @@ public class EnemyMelee : Enemy
         base.Start();
 
         StateMachine.Initialize(IdleState);
+
+        InitializeSpeciality();
     }
 
     protected override void Update()
@@ -57,6 +70,14 @@ public class EnemyMelee : Enemy
         base.Update();
 
         StateMachine.CurrentState.Update();
+    }
+
+    private void InitializeSpeciality()
+    {
+        if (meleeType != EnemyMeleeType.Shield) return;
+
+        Anim.SetFloat(ChaseIndex, 1);
+        shieldTransform.gameObject.SetActive(true);
     }
 
     public override void GetHit()
