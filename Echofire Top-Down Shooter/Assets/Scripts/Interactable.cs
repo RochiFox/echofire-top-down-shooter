@@ -18,10 +18,10 @@ public class Interactable : MonoBehaviour
         defaultMaterial = mesh.sharedMaterial;
     }
 
-    protected void UpdateMeshAndMaterial(MeshRenderer newMesh)
+    protected void UpdateMeshAndMaterial(MeshRenderer mesh)
     {
-        mesh = newMesh;
-        defaultMaterial = newMesh.sharedMaterial;
+        this.mesh = mesh;
+        defaultMaterial = mesh.sharedMaterial;
     }
 
     public virtual void Interaction()

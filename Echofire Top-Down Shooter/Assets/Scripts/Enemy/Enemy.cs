@@ -72,6 +72,11 @@ public class Enemy : MonoBehaviour
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
+    public virtual void AbilityTrigger()
+    {
+        StateMachine.CurrentState.AbilityTrigger();
+    }
+
     public bool PlayerInAggressionRange() => Vector3.Distance(transform.position, Player.position) < aggressionRange;
 
     public Vector3 GetPatrolDestination()

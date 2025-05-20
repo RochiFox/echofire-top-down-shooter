@@ -23,9 +23,9 @@ public class Bullet : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    public void BulletSetup(float flyDistanceParam, float newImpactForce)
+    public void BulletSetup(float flyDistance, float impactForce)
     {
-        impactForce = newImpactForce;
+        this.impactForce = impactForce;
 
         bulletDisabled = false;
         cd.enabled = true;
@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
 
         trailRenderer.time = 0.25f;
         startPosition = transform.position;
-        flyDistance = flyDistanceParam + 1;
+        this.flyDistance = flyDistance + 1;
     }
 
     private void Update()

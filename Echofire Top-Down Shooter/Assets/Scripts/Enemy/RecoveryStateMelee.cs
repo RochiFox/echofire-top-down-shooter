@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RecoveryStateMelee : EnemyState
 {
     private EnemyMelee enemy;
@@ -23,12 +25,12 @@ public class RecoveryStateMelee : EnemyState
 
         if (TriggerCalled)
         {
-            StateMachine.ChangeState(enemy.AbilityState);
-
-            // if (enemy.PlayerInAttackRange())
-            //     StateMachine.ChangeState(enemy.AttackState);
-            // else
-            //     StateMachine.ChangeState(enemy.ChaseState);
+            if (enemy.CanThrowAxe())
+                StateMachine.ChangeState(enemy.AbilityState);
+            else if (enemy.PlayerInAttackRange())
+                StateMachine.ChangeState(enemy.AttackState);
+            else
+                StateMachine.ChangeState(enemy.ChaseState);
         }
     }
 
