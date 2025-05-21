@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,9 +61,6 @@ public class EnemyMelee : Enemy
     [Header("Attack Data")] public AttackData attackData;
     public List<AttackData> attackList;
 
-    [SerializeField] private Transform hiddenWeapon;
-    [SerializeField] private Transform pulledWeapon;
-
     protected override void Awake()
     {
         base.Awake();
@@ -111,15 +109,24 @@ public class EnemyMelee : Enemy
         base.AbilityTrigger();
 
         moveSpeed *= 0.6f;
-        pulledWeapon.gameObject.SetActive(false);
+        EnableWeaponModel(false);
     }
 
     private void InitializeSpeciality()
     {
-        if (meleeType != EnemyMeleeType.Shield) return;
-
-        Anim.SetFloat(ChaseIndex, 1);
-        shieldTransform.gameObject.SetActive(true);
+        switch (meleeType)
+        {
+            case EnemyMeleeType.AxeThrow:
+                visuals.SetupWeaponType(EnemyMeleeWeaponType.Throw);
+                break;
+            case EnemyMeleeType.Shield:
+                Anim.SetFloat(ChaseIndex, 1);
+                shieldTransform.gameObject.SetActive(true);
+                visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public override void GetHit()
@@ -130,10 +137,9 @@ public class EnemyMelee : Enemy
             StateMachine.ChangeState(DeadState);
     }
 
-    public void PullWeapon()
+    public void EnableWeaponModel(bool active)
     {
-        hiddenWeapon.gameObject.SetActive(false);
-        pulledWeapon.gameObject.SetActive(true);
+        visuals.CurrentWeaponModel.gameObject.SetActive(active);
     }
 
     public void ActivateDodgeRoll()

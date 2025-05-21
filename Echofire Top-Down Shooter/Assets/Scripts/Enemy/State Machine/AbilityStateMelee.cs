@@ -21,7 +21,7 @@ public class AbilityStateMelee : EnemyState
     {
         base.Enter();
 
-        enemy.PullWeapon();
+        enemy.EnableWeaponModel(true);
 
         moveSpeed = enemy.moveSpeed;
 
