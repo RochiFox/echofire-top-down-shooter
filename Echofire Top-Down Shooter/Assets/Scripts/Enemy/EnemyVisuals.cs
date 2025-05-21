@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,10 +11,15 @@ public enum EnemyMeleeWeaponType
 
 public class EnemyVisuals : MonoBehaviour
 {
-    [Header("Weapon model")] [SerializeField]
+    [Header("Weapon visuals")] [SerializeField]
     private EnemyWeaponModel[] weaponModels;
 
     public GameObject CurrentWeaponModel { get; private set; }
+
+    [Header("Corruption visuals")] [SerializeField]
+    private GameObject[] corruptionCrystals;
+
+    [SerializeField] private int corruptionAmount;
 
     [SerializeField] private EnemyMeleeWeaponType weaponType;
 
@@ -25,6 +29,7 @@ public class EnemyVisuals : MonoBehaviour
     private void Awake()
     {
         weaponModels = GetComponentsInChildren<EnemyWeaponModel>(true);
+        CollectCorruptionCrystals();
     }
 
     public void SetupWeaponType(EnemyMeleeWeaponType type) => weaponType = type;
@@ -33,6 +38,7 @@ public class EnemyVisuals : MonoBehaviour
     {
         SetupRandomColor();
         SetupRandomWeapon();
+        SetupRandomCorruption();
     }
 
     private void SetupRandomWeapon()
@@ -61,5 +67,39 @@ public class EnemyVisuals : MonoBehaviour
         };
 
         skinnedMeshRenderer.material = newMaterial;
+    }
+
+    private void SetupRandomCorruption()
+    {
+        List<int> availableIndex = new List<int>();
+
+        for (int i = 0; i < corruptionCrystals.Length; i++)
+        {
+            availableIndex.Add(i);
+            corruptionCrystals[i].SetActive(false);
+        }
+
+        for (int i = 0; i < corruptionAmount; i++)
+        {
+            if (availableIndex.Count == 0)
+                break;
+
+            int randomIndex = Random.Range(0, availableIndex.Count);
+            int objectIndex = availableIndex[randomIndex];
+
+            corruptionCrystals[objectIndex].SetActive(true);
+            availableIndex.RemoveAt(randomIndex);
+        }
+    }
+
+    private void CollectCorruptionCrystals()
+    {
+        EnemyCorruptionCrystal[] crystalComponents = GetComponentsInChildren<EnemyCorruptionCrystal>();
+        corruptionCrystals = new GameObject[crystalComponents.Length];
+
+        for (int i = 0; i < crystalComponents.Length; i++)
+        {
+            corruptionCrystals[i] = crystalComponents[i].gameObject;
+        }
     }
 }

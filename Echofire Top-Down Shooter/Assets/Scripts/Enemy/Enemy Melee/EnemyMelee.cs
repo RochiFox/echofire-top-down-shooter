@@ -124,6 +124,10 @@ public class EnemyMelee : Enemy
                 shieldTransform.gameObject.SetActive(true);
                 visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
                 break;
+            case EnemyMeleeType.Dodge:
+            case EnemyMeleeType.Regular:
+                visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
