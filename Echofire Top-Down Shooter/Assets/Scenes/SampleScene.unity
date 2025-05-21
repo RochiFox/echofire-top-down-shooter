@@ -13537,8 +13537,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2051637044}
   - component: {fileID: 2051637043}
-  - component: {fileID: 2051637045}
   - component: {fileID: 2051637046}
+  - component: {fileID: 2051637047}
+  - component: {fileID: 2051637045}
   m_Layer: 0
   m_Name: Enemy Melee
   m_TagString: Untagged
@@ -13652,6 +13653,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollParent: {fileID: 543450651579253278}
+--- !u!114 &2051637047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051637042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6255adfbc09b974b84aa03725c05668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorTextures:
+  - {fileID: 2800000, guid: fcc10cfb07654af42a1686a6e2c54e4c, type: 3}
+  - {fileID: 2800000, guid: fdf5494f8aad4ff4ea4ca53b598c7adb, type: 3}
+  - {fileID: 2800000, guid: 37346a0a5d934c44db20d0cbe54f0caa, type: 3}
+  - {fileID: 2800000, guid: bf3e4e768f8d0d345a568f731d533d19, type: 3}
+  skinnedMeshRenderer: {fileID: 4285128075797721434}
 --- !u!4 &2053631597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7342507800261643077, guid: e0b33daac2b36694da06fce2327245fd, type: 3}

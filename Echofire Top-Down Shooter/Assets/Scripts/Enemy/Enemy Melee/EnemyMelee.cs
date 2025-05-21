@@ -31,6 +31,8 @@ public class EnemyMelee : Enemy
     private static readonly int ChaseIndex = Animator.StringToHash("ChaseIndex");
     private static readonly int Dodge = Animator.StringToHash("Dodge");
 
+    private EnemyVisuals visuals;
+
     #region States
 
     public IdleStateMelee IdleState { get; private set; }
@@ -38,7 +40,7 @@ public class EnemyMelee : Enemy
     public RecoveryStateMelee RecoveryState { get; private set; }
     public ChaseStateMelee ChaseState { get; private set; }
     public AttackStateMelee AttackState { get; private set; }
-    public DeadStateMelee DeadState { get; private set; }
+    private DeadStateMelee DeadState { get; set; }
     public AbilityStateMelee AbilityState { get; private set; }
 
     #endregion
@@ -65,6 +67,8 @@ public class EnemyMelee : Enemy
     {
         base.Awake();
 
+        visuals = GetComponent<EnemyVisuals>();
+
         IdleState = new IdleStateMelee(this, StateMachine, "Idle");
         MoveState = new MoveStateMelee(this, StateMachine, "Move");
         RecoveryState = new RecoveryStateMelee(this, StateMachine, "Recovery");
@@ -81,6 +85,7 @@ public class EnemyMelee : Enemy
         StateMachine.Initialize(IdleState);
 
         InitializeSpeciality();
+        visuals.SetupLook();
     }
 
     protected override void Update()
