@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float impactForce;
+    private float impactForce;
 
     private Rigidbody rb;
     private BoxCollider cd;
@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     private float flyDistance;
     private bool bulletDisabled;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         cd = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    public void BulletSetup(float flyDistance, float impactForce)
+    public void BulletSetup(float flyDistance = 100, float impactForce = 100)
     {
         this.impactForce = impactForce;
 
@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         this.flyDistance = flyDistance + 1;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         FadeTrailIfNeeded();
         DisableBulletIfNeeded();
@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour
             trailRenderer.time -= 2 * Time.deltaTime; // magic number 2 is choosing for testing
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         CreateImpactFx(collision);
         ReturnBulletToPool();
@@ -87,9 +87,9 @@ public class Bullet : MonoBehaviour
         enemy.DeathImpact(force, collision.contacts[0].point, hitRigidbody);
     }
 
-    private void ReturnBulletToPool() => ObjectPool.instance.ReturnObject(gameObject);
+    protected void ReturnBulletToPool() => ObjectPool.instance.ReturnObject(gameObject);
 
-    private void CreateImpactFx(Collision collision)
+    protected void CreateImpactFx(Collision collision)
     {
         if (collision.contacts.Length <= 0) return;
 

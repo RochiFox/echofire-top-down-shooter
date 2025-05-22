@@ -1,8 +1,18 @@
+using UnityEngine;
+
 public class EnemyRange : Enemy
 {
+    private static readonly int Shoot = Animator.StringToHash("Shoot");
+
+    public Transform weaponHolder;
+    public float fireRate = 1; // Bullets per second
+    public GameObject bulletPrefab;
+    public Transform gunPoint;
+    public float bulletSpeed = 20;
+
     public IdleStateRange IdleState { get; private set; }
     public MoveStateRange MoveState { get; private set; }
-    public BattleStateRange BattleState { get; private set; }
+    private BattleStateRange BattleState { get; set; }
 
     protected override void Awake()
     {
@@ -24,6 +34,24 @@ public class EnemyRange : Enemy
     {
         base.Update();
         StateMachine.CurrentState.Update();
+    }
+
+    public void FireSingleBullet()
+    {
+        Anim.SetTrigger(Shoot);
+
+        Vector3 bulletsDirection = ((Player.position + Vector3.up) - gunPoint.position).normalized;
+
+        GameObject newBullet = ObjectPool.instance.GetObject(bulletPrefab);
+        newBullet.transform.position = gunPoint.position;
+        newBullet.transform.rotation = Quaternion.LookRotation(gunPoint.forward);
+
+        newBullet.GetComponent<EnemyBullet>().BulletSetup();
+
+        Rigidbody rbNewBullet = newBullet.GetComponent<Rigidbody>();
+
+        rbNewBullet.mass = 20 / bulletSpeed;
+        rbNewBullet.velocity = bulletsDirection * bulletSpeed;
     }
 
     protected override void EnterBattleMode()
