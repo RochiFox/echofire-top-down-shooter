@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 public enum EnemyMeleeWeaponType
 {
     OneHand,
-    Throw
+    Throw,
+    Unarmed
 }
 
 public class EnemyVisuals : MonoBehaviour
@@ -55,6 +56,19 @@ public class EnemyVisuals : MonoBehaviour
 
         CurrentWeaponModel = filteredWeaponModels[randomIndex].gameObject;
         CurrentWeaponModel.SetActive(true);
+
+        OverrideAnimatorControllerIfCan();
+    }
+
+    private void OverrideAnimatorControllerIfCan()
+    {
+        AnimatorOverrideController overrideController =
+            CurrentWeaponModel.GetComponent<EnemyWeaponModel>().overrideController;
+
+        if (overrideController)
+        {
+            GetComponentInChildren<Animator>().runtimeAnimatorController = overrideController;
+        }
     }
 
     private void SetupRandomColor()

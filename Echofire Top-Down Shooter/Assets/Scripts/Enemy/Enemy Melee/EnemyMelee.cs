@@ -125,6 +125,8 @@ public class EnemyMelee : Enemy
                 visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
                 break;
             case EnemyMeleeType.Dodge:
+                visuals.SetupWeaponType(EnemyMeleeWeaponType.Unarmed);
+                break;
             case EnemyMeleeType.Regular:
                 visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
                 break;
