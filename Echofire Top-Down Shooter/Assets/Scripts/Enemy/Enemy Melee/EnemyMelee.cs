@@ -32,7 +32,7 @@ public class EnemyMelee : Enemy
     private static readonly int ChaseIndex = Animator.StringToHash("ChaseIndex");
     private static readonly int Dodge = Animator.StringToHash("Dodge");
 
-    private EnemyVisuals visuals;
+    public EnemyVisuals Visuals { get; private set; }
 
     #region States
 
@@ -65,7 +65,7 @@ public class EnemyMelee : Enemy
     {
         base.Awake();
 
-        visuals = GetComponent<EnemyVisuals>();
+        Visuals = GetComponent<EnemyVisuals>();
 
         IdleState = new IdleStateMelee(this, StateMachine, "Idle");
         MoveState = new MoveStateMelee(this, StateMachine, "Move");
@@ -83,7 +83,7 @@ public class EnemyMelee : Enemy
         StateMachine.Initialize(IdleState);
 
         InitializeSpeciality();
-        visuals.SetupLook();
+        Visuals.SetupLook();
     }
 
     protected override void Update()
@@ -117,18 +117,18 @@ public class EnemyMelee : Enemy
         switch (meleeType)
         {
             case EnemyMeleeType.AxeThrow:
-                visuals.SetupWeaponType(EnemyMeleeWeaponType.Throw);
+                Visuals.SetupWeaponType(EnemyMeleeWeaponType.Throw);
                 break;
             case EnemyMeleeType.Shield:
                 Anim.SetFloat(ChaseIndex, 1);
                 shieldTransform.gameObject.SetActive(true);
-                visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                Visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
                 break;
             case EnemyMeleeType.Dodge:
-                visuals.SetupWeaponType(EnemyMeleeWeaponType.Unarmed);
+                Visuals.SetupWeaponType(EnemyMeleeWeaponType.Unarmed);
                 break;
             case EnemyMeleeType.Regular:
-                visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                Visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -145,7 +145,7 @@ public class EnemyMelee : Enemy
 
     public void EnableWeaponModel(bool active)
     {
-        visuals.CurrentWeaponModel.gameObject.SetActive(active);
+        Visuals.CurrentWeaponModel.gameObject.SetActive(active);
     }
 
     public void ActivateDodgeRoll()
