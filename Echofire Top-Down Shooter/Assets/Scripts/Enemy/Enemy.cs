@@ -43,9 +43,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (ShouldEnterBattleMode())
+            EnterBattleMode();
     }
 
-    protected bool ShouldEnterBattleMode()
+    private bool ShouldEnterBattleMode()
     {
         bool inAggressionRange = Vector3.Distance(transform.position, Player.position) < aggressionRange;
 
@@ -74,7 +76,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(DeathImpactCoroutine(force, hitPoint, rb));
     }
 
-    private IEnumerator DeathImpactCoroutine(Vector3 force, Vector3 hitPoint, Rigidbody rb)
+    private static IEnumerator DeathImpactCoroutine(Vector3 force, Vector3 hitPoint, Rigidbody rb)
     {
         yield return new WaitForSeconds(0.1f);
 

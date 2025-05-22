@@ -23892,7 +23892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 20
   idleTime: 1.5
-  aggressionRange: 0
+  aggressionRange: 8
   moveSpeed: 1.5
   chaseSpeed: 4
   turnSpeed: 5

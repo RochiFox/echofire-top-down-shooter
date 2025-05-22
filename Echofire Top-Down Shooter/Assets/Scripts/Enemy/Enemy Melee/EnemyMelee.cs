@@ -91,9 +91,6 @@ public class EnemyMelee : Enemy
     {
         base.Update();
         StateMachine.CurrentState.Update();
-
-        if (ShouldEnterBattleMode())
-            EnterBattleMode();
     }
 
     protected override void EnterBattleMode()
