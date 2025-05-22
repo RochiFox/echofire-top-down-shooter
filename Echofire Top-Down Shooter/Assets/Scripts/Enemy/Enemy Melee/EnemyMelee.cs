@@ -82,7 +82,7 @@ public class EnemyMelee : Enemy
 
         StateMachine.Initialize(IdleState);
 
-        InitializeSpeciality();
+        InitializePerk();
         Visuals.SetupLook();
         UpdateAttackData();
     }
@@ -124,7 +124,7 @@ public class EnemyMelee : Enemy
         }
     }
 
-    private void InitializeSpeciality()
+    private void InitializePerk()
     {
         switch (meleeType)
         {
@@ -208,6 +208,8 @@ public class EnemyMelee : Enemy
         return 0;
     }
 
+    public bool PlayerInAttackRange() => Vector3.Distance(transform.position, Player.position) < attackData.attackRange;
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -215,6 +217,4 @@ public class EnemyMelee : Enemy
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackData.attackRange);
     }
-
-    public bool PlayerInAttackRange() => Vector3.Distance(transform.position, Player.position) < attackData.attackRange;
 }
