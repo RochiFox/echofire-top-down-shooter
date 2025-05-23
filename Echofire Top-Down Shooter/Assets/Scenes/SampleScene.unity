@@ -21224,6 +21224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
+  weaponHoldType: 0
 --- !u!1001 &5746508435516929168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22372,6 +22373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  weaponHoldType: 0
 --- !u!4 &6704440984825435305
 Transform:
   m_ObjectHideFlags: 0
@@ -23018,6 +23020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
+  weaponHoldType: 0
 --- !u!114 &7202882522497105730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23649,7 +23652,7 @@ MonoBehaviour:
   - {fileID: 5777446155928499748}
   - {fileID: 2014062435170110506}
   weaponHolder: {fileID: 1127776845856942732}
-  weaponType: 4
+  weaponType: 2
   fireRate: 5
   bulletPrefab: {fileID: 709851603379088992, guid: f8d7bde0dfe857d468357b3e57318511, type: 3}
   gunPoint: {fileID: 2009011080}
@@ -23807,6 +23810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 4
+  weaponHoldType: 2
 --- !u!1 &7754879570544710322
 GameObject:
   m_ObjectHideFlags: 0
@@ -25634,6 +25638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
+  weaponHoldType: 1
 --- !u!4 &8926601063470605605
 Transform:
   m_ObjectHideFlags: 0

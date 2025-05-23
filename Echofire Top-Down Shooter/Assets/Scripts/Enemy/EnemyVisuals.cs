@@ -105,7 +105,10 @@ public class EnemyVisuals : MonoBehaviour
         foreach (EnemyRangeWeaponModel weaponModel in weaponModels)
         {
             if (weaponModel.weaponType == weaponType)
+            {
+                SwitchAnimationLayer((int)weaponModel.weaponHoldType);
                 return weaponModel.gameObject;
+            }
         }
 
         Debug.LogWarning($"No range weapon model found for type: {weaponType}");
@@ -148,5 +151,17 @@ public class EnemyVisuals : MonoBehaviour
         {
             GetComponentInChildren<Animator>().runtimeAnimatorController = overrideController;
         }
+    }
+
+    private void SwitchAnimationLayer(int layerIndex)
+    {
+        Animator anim = GetComponentInChildren<Animator>();
+
+        for (int i = 1; i < anim.layerCount; i++)
+        {
+            anim.SetLayerWeight(i, 0);
+        }
+
+        anim.SetLayerWeight(layerIndex, 1);
     }
 }
