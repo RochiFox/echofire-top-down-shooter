@@ -5,6 +5,8 @@ public class EnemyRange : Enemy
     private static readonly int Shoot = Animator.StringToHash("Shoot");
 
     public Transform weaponHolder;
+    public EnemyRangeWeaponType weaponType;
+
     public float fireRate = 1; // Bullets per second
     public GameObject bulletPrefab;
     public Transform gunPoint;
@@ -30,6 +32,7 @@ public class EnemyRange : Enemy
         base.Start();
 
         StateMachine.Initialize(IdleState);
+        Visuals.SetupLook();
     }
 
     protected override void Update()
@@ -42,7 +45,7 @@ public class EnemyRange : Enemy
     {
         Anim.SetTrigger(Shoot);
 
-        Vector3 bulletsDirection = ((Player.position + Vector3.up) - gunPoint.position).normalized;
+        Vector3 bulletsDirection = ((PlayerTransform.position + Vector3.up) - gunPoint.position).normalized;
 
         GameObject newBullet = ObjectPool.instance.GetObject(bulletPrefab);
         newBullet.transform.position = gunPoint.position;

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     public PlayerControls Controls { get; private set; }
     public PlayerAim Aim { get; private set; }
     public PlayerMovement Movement { get; private set; }
@@ -11,6 +13,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        if (!Instance)
+            Instance = this;
+
         Controls = new PlayerControls();
         Aim = GetComponent<PlayerAim>();
         Movement = GetComponent<PlayerMovement>();

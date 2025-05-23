@@ -32,7 +32,7 @@ public class EnemyMelee : Enemy
     private static readonly int ChaseIndex = Animator.StringToHash("ChaseIndex");
     private static readonly int Dodge = Animator.StringToHash("Dodge");
 
-    public EnemyVisuals Visuals { get; private set; }
+    
 
     #region States
 
@@ -47,6 +47,8 @@ public class EnemyMelee : Enemy
     #endregion
 
     [Header("Enemy Settings")] public EnemyMeleeType meleeType;
+    public EnemyMeleeWeaponType weaponType;
+
     public Transform shieldTransform;
     public float dodgeCooldown;
     private float lastTimeDodge = -10;
@@ -65,7 +67,7 @@ public class EnemyMelee : Enemy
     {
         base.Awake();
 
-        Visuals = GetComponent<EnemyVisuals>();
+        
 
         IdleState = new IdleStateMelee(this, StateMachine, "Idle");
         MoveState = new MoveStateMelee(this, StateMachine, "Move");
@@ -126,18 +128,18 @@ public class EnemyMelee : Enemy
         switch (meleeType)
         {
             case EnemyMeleeType.AxeThrow:
-                Visuals.SetupWeaponType(EnemyMeleeWeaponType.Throw);
+                weaponType = EnemyMeleeWeaponType.Throw;
                 break;
             case EnemyMeleeType.Shield:
                 Anim.SetFloat(ChaseIndex, 1);
                 shieldTransform.gameObject.SetActive(true);
-                Visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                weaponType = EnemyMeleeWeaponType.OneHand;
                 break;
             case EnemyMeleeType.Dodge:
-                Visuals.SetupWeaponType(EnemyMeleeWeaponType.Unarmed);
+                weaponType = EnemyMeleeWeaponType.Unarmed;
                 break;
             case EnemyMeleeType.Regular:
-                Visuals.SetupWeaponType(EnemyMeleeWeaponType.OneHand);
+                weaponType = EnemyMeleeWeaponType.OneHand;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -165,7 +167,7 @@ public class EnemyMelee : Enemy
         if (StateMachine.CurrentState != ChaseState)
             return;
 
-        if (Vector3.Distance(transform.position, Player.position) < 1.8f)
+        if (Vector3.Distance(transform.position, PlayerTransform.position) < 1.8f)
             return;
 
         float dodgeAnimationDuration = GetAnimationClipDuration("Dodge Roll");
@@ -205,7 +207,8 @@ public class EnemyMelee : Enemy
         return 0;
     }
 
-    public bool PlayerInAttackRange() => Vector3.Distance(transform.position, Player.position) < attackData.attackRange;
+    public bool PlayerInAttackRange() =>
+        Vector3.Distance(transform.position, PlayerTransform.position) < attackData.attackRange;
 
     protected override void OnDrawGizmos()
     {

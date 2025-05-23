@@ -19,7 +19,7 @@ public class RecoveryStateMelee : EnemyState
     {
         base.Update();
 
-        enemy.FaceTarget(enemy.Player.position);
+        enemy.FaceTarget(Enemy.PlayerTransform.position);
 
         if (TriggerCalled)
         {

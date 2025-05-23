@@ -30,7 +30,7 @@ public class ChaseStateMelee : EnemyState
         enemy.FaceTarget(enemy.Agent.steeringTarget);
 
         if (CanUpdateDestination())
-            enemy.Agent.destination = enemy.Player.transform.position;
+            enemy.Agent.destination = Enemy.PlayerTransform.transform.position;
     }
 
     private bool CanUpdateDestination()

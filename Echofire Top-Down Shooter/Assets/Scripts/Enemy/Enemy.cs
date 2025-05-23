@@ -21,17 +21,18 @@ public class Enemy : MonoBehaviour
 
     protected bool InBattleMode { get; private set; }
 
-    [SerializeField] private Transform playerTransform;
-    public Transform Player => playerTransform;
+    public static Transform PlayerTransform => Player.Instance ? Player.Instance.transform : null;
 
     public Animator Anim { get; private set; }
     public NavMeshAgent Agent { get; private set; }
     protected EnemyStateMachine StateMachine { get; private set; }
+    public EnemyVisuals Visuals { get; private set; }
 
     protected virtual void Awake()
     {
         StateMachine = new EnemyStateMachine();
 
+        Visuals = GetComponent<EnemyVisuals>();
         Agent = GetComponent<NavMeshAgent>();
         Anim = GetComponentInChildren<Animator>();
     }
@@ -49,7 +50,7 @@ public class Enemy : MonoBehaviour
 
     private bool ShouldEnterBattleMode()
     {
-        bool inAggressionRange = Vector3.Distance(transform.position, Player.position) < aggressionRange;
+        bool inAggressionRange = Vector3.Distance(transform.position, PlayerTransform.position) < aggressionRange;
 
         if (inAggressionRange && !InBattleMode)
         {

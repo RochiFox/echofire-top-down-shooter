@@ -44,7 +44,7 @@ public class AttackStateMelee : EnemyState
 
         if (enemy.ManualRotationActive())
         {
-            enemy.FaceTarget(enemy.Player.position);
+            enemy.FaceTarget(Enemy.PlayerTransform.position);
             attackDirection = enemy.transform.position + (enemy.transform.forward * MAX_ATTACK_DISTANCE);
         }
 
@@ -79,7 +79,7 @@ public class AttackStateMelee : EnemyState
         enemy.attackData = UpdatedAttackData();
     }
 
-    private bool PlayerClose() => Vector3.Distance(enemy.transform.position, enemy.Player.position) <= 1;
+    private bool PlayerClose() => Vector3.Distance(enemy.transform.position, Enemy.PlayerTransform.position) <= 1;
 
     private EnemyMeleeAttackData UpdatedAttackData()
     {

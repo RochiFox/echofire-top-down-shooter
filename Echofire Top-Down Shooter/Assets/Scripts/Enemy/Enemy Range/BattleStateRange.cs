@@ -22,7 +22,7 @@ public class BattleStateRange : EnemyState
     {
         base.Update();
 
-        enemy.FaceTarget(enemy.Player.position);
+        enemy.FaceTarget(Enemy.PlayerTransform.position);
 
         if (WeaponOutOfBullets())
         {
